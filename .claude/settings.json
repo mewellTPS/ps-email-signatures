@@ -3,6 +3,7 @@
     "deny": [
       "Bash(rm:*)",
       "Bash(rmdir:*)",
+      "Bash(git rm:*)",
       "Bash(git clean:*)",
       "Bash(git reset --hard *)",
       "Bash(git push --force *)",
@@ -23,8 +24,13 @@
       "Bash(git rebase:*)",
       "Bash(git reset:*)",
       "Bash(git branch:*)",
+      "Bash(mv:*)",
+      "Bash(find:*)",
+      "Bash(cp:*)",
       "Bash(npm install:*)",
       "Bash(pip install:*)",
+      "Bash(pod install:*)",
+      "Bash(xcodebuild:*)",
       "Edit(.claude/**)",
       "Edit(.github/**)"
     ]
