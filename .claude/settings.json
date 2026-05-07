@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(rmdir:*)",
+      "Bash(find:* -delete*)",
+      "Bash(find:* -exec rm*)",
+      "Bash(git push:* --force*)",
+      "Bash(git push:* -f*)",
+      "Bash(git reset:* --hard*)",
+      "Bash(git clean:*)",
+      "Bash(git branch:* -D*)",
+      "Bash(git branch:* --delete --force*)",
+      "Bash(sudo:*)",
+      "Bash(chmod:* 777*)",
+      "Bash(dd:*)",
+      "Bash(mkfs:*)",
+      "Read(.env*)",
+      "Read(**/*.pem)",
+      "Read(**/.aws/**)",
+      "Read(**/.ssh/**)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(npm install:*)",
+      "Bash(pip install:*)",
+      "Edit(.claude/**)",
+      "Edit(.github/**)"
+    ]
+  }
+}
