@@ -12,7 +12,7 @@
       "Bash(git branch:* -D*)",
       "Bash(git branch:* --delete --force*)",
       "Bash(sudo:*)",
-      "Bash(chmod:* 777*)",
+      "Bash(chmod:*)",
       "Bash(dd:*)",
       "Bash(mkfs:*)",
       "Read(.env*)",
