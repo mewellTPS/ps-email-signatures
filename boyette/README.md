@@ -20,7 +20,10 @@ vertical divider, right-side content with a social icon row).
   link is orange — matching the reference.
 - Font: Arial / Helvetica (web-safe). No brand font was specified; say the word if Boyette
   has one and I'll swap the stack.
-- Office phone only — **static** `(352) 830-7444`. No mobile line.
+- Two locations, both **static**, stacked as paired phone + address blocks (no mobile line, no location labels):
+  - `(813) 923-0008` — 8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638 (primary, listed first)
+  - `(352) 830-7444` — 15215 N Hwy 329, Reddick, FL 32686
+  Email and website are shared (one each), below the location blocks.
 - Social set: Google Business, Facebook, Instagram, Yelp (LinkedIn/YouTube dropped per your call).
 - Vertical divider is a 2px dark-gray rule (`border-left`). The reference's small orange tick
   at the top of the divider is omitted — it's unreliable across email clients. Easy to add back
