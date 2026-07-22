@@ -6,9 +6,10 @@ Dynamic, server-side signature for CodeTwo. Condensed three-zone layout:
 ## Files
 - `signature-wtrdr.html` — the **live** CodeTwo-ready snippet (Option 2, three-zone). Keeps dynamic `{fields}`.
 - `signature-wtrdr-option1.html` — **alternate** layout (Option 1, compact stack: logo + single column, Boyette-style). Kept on hand in case you want to switch.
-- `preview.html` — open in a browser to see both layouts rendered (sample data + stand-in icons).
+- `preview.html` — open in a browser to see both layouts rendered (sample data). Uses the real self-hosted badges.
 - `assets/logo.png` — logo, 230×230 (displays at 100×100).
-- `assets/_preview-*.png` — navy icon **stand-ins for the preview only** (not used in the real signature).
+- `assets/badge-{google,facebook,instagram}.png` — self-hosted social badges: white glyph on link-blue `#2E6DA6` filled circles, 40×40 (display 18). Used by both the signature and the preview.
+- `assets/_preview-*.png` — old navy preview stand-ins, now unused (superseded by the badges; safe to delete).
 - `assets/headshot.png` — leftover from the previous headshot layout; **no longer referenced** (safe to remove).
 - Source files: `../resources/wtr_dr/` (untouched).
 
@@ -28,7 +29,7 @@ re-inserted through CodeTwo's ribbon so the program links them — otherwise the
    you want the alias the message was sent from.
 2. **Logo**: click the logo spot and insert `assets/logo.png` via the image button so CodeTwo hosts it.
    The local `src="assets/logo.png"` path will not resolve on its own.
-3. **Social icons**: use **Insert → Social media icons** (see below) — don't rely on the pasted `img` refs.
+3. **Social icons**: self-hosted badges in `assets/` — upload the three `badge-*.png` with the logo (image button); no CodeTwo gallery step needed.
 4. **RT tags**: `{RT}…{/RT}` wrap the Email element so an empty value removes the whole line. Keep the
    closing `{/RT}` at the start of the following line (already set up this way in the file).
 5. **Verify by send/preview**, not by the editor view — placeholders always look literal while editing.
@@ -50,26 +51,14 @@ Outlook's Word engine may center less precisely.)
 - **Address** condensed to two lines (`8011 Land O' Lakes Blvd` / `Land O' Lakes, FL 34638`).
 - **Social set**: Google (GMB), Facebook, Instagram — only the three you specified.
 
-## Social icons — using CodeTwo's resources (vs. the bundled approach)
-You asked to source these from CodeTwo this time. Here's the difference:
+## Social icons — self-hosted badges
+White Font Awesome Free brand glyphs (v6.5.2, CC-BY 4.0) composited onto link-blue `#2E6DA6` filled
+circles, hosted in `assets/` — the same bundled approach as the other brands, so all signatures look
+uniform. Self-contained; nothing hotlinked. This replaced the earlier CodeTwo-gallery plan and settles
+the open blue-vs-navy question in favor of link-blue `#2E6DA6`.
 
-| | CodeTwo gallery (this one) | Bundled PNGs (Boyette) |
-|---|---|---|
-| Hosting | CodeTwo hosts the images | You host them in `assets/` |
-| Look | CodeTwo's house style; limited recolor | Any glyph, exact brand color |
-| Coverage | Their gallery only | Anything you can find/draw |
-| Effort | Click to insert in editor | Fetch + recolor + manage files |
-
-**How to add them in CodeTwo:**
-1. Paste `signature-wtrdr.html` into the editor (HTML/source view).
-2. In the social-icons cell, use **Insert → Social media icons** and add Facebook + Instagram,
-   pointing them at the URLs already in the HTML. CodeTwo will host these and rewrite the `src`.
-3. **Google (GMB):** CodeTwo's gallery may not include a Google Business icon. If it does, insert it
-   the same way. If it doesn't, two options — drop GMB, or I'll bundle just that one icon (navy, to match).
-   Let me know which.
-
-The `img_fb_...` / `img_ig_...` references in the HTML are CodeTwo's built-in icon names; if they show
-as broken after pasting, just re-insert via the editor (step 2) and they'll resolve.
+**In CodeTwo:** paste `signature-wtrdr.html`, then upload `logo.png` and the three `badge-*.png`
+(plus `endorsement.png`) via the image button so CodeTwo hosts them. The profile URLs are already in the HTML.
 
 ## Note
 Preview images are `_`-prefixed (`assets/_preview-*.png`) — safe to delete; not part of the live signature.
