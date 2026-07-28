@@ -13,16 +13,48 @@ different logo treatment on the left. Pick one when loading into CodeTwo.
 - `signature-boyette-combined.html` — **combined-logo variant.** Same snippet but the left cell is
   a single combined lockup (icon + wordmark + endorsement in one image).
 - `preview-combined.html` — browser preview of the combined-logo variant (sample data).
-- `assets/boy-logo.png` — logo icon, 320×221 (displays at 160×110). Used by the separate-logo variant.
-- `assets/endorsement.png` — "Powered by The Purple Standard" strip, display 180×9 (source 600×29).
-  Used by the separate-logo variant.
-- `assets/boyette-combined.png` — combined lockup: icon + "Boyette Pump & Well" wordmark +
-  "Powered by The Purple Standard" endorsement in one image, 1082×824 (displays at 190×145).
-  Used by the combined-logo variant.
+- `assets/boyette-logo.png` — **upload/hosting master** for the combined lockup: 380×290,
+  displays at 190×145. Derived from `boyette-combined.png`. This is the file to host.
+- `assets/boyette-combined.png` — full-resolution combined lockup: icon + "Boyette Pump & Well"
+  wordmark + "Powered by The Purple Standard" endorsement in one image, 1082×824. Master source
+  for re-exports; too large to host directly.
 - `assets/badge-google.png` / `badge-facebook.png` / `badge-instagram.png` / `badge-yelp.png`
   — white glyph on brand-orange `#F93822` filled circles, 56×56 (display at 28px). Supersede the
   older bare-glyph `social-*.png` (still in `assets/`, now unused).
 - Source logo: `../resources/boyette/BOY-LOGO-STACKED-COLOR-DARK.png` (untouched).
+
+> **`assets/boy-logo.png` and `assets/endorsement.png` were deleted**, so
+> `signature-boyette.html` (the separate-logo variant) currently references two missing
+> images. Either re-export them from the source logo or retire that variant.
+
+## Asset spec (CodeTwo + Outlook)
+
+Every hosted or embedded image in this signature follows the same two rules:
+
+| Rule | Value | Why |
+|---|---|---|
+| Source dimensions | **exactly 2× the display size** | Sharp on retina/HiDPI. CodeTwo recommends double-sized PNG/JPG for HD/4K/retina screens, and states Outlook honors width/height scaling correctly. |
+| DPI metadata | **explicit 96 DPI** (`pHYs` = 3779 px/m) | Outlook's Word engine renders at a 96 DPI baseline and rescales images whose metadata differs — a 150 DPI image renders at 64% size, a 72 DPI one at 133%. |
+| Display size | set in **both** the HTML `width`/`height` attributes **and** inline `style` | Outlook ignores CSS-only sizing; attribute-only sizing is ignored by some clients. Belt and braces per CodeTwo. |
+| Format | PNG only | Outlook (Word engine) has no WebP or SVG support. |
+
+Current spec for this signature:
+
+| Asset | Display | Source | DPI |
+|---|---|---|---|
+| `boyette-logo.png` | 190×145 | 380×290 | 96 |
+| `badge-*.png` (×4) | 28×28 | 56×56 | 96 |
+
+Re-export recipe (ImageMagick — `-strip` clears `pHYs`, so density must be a second pass):
+
+```bash
+magick boyette-combined.png -resize 380x290! -strip boyette-logo.png
+magick boyette-logo.png -density 96 -units PixelsPerInch boyette-logo.png
+```
+
+**Known residual risk:** CodeTwo notes Apple Mail can disregard scaling instructions,
+most often when a message is replied to — a 2× source would then render at full size.
+Accepted trade-off: Outlook is the primary target and handles scaling correctly.
 
 ## Design decisions
 - Brand colors sampled from the logo: red-orange `#F93822` (website link + social icons),
@@ -48,11 +80,31 @@ brand-orange `#F93822` filled circles, rasterized locally. Self-contained; nothi
 1. Signature rule → **Design** step → **Edit signature** → HTML / source view.
 2. Paste the contents of your chosen variant — `signature-boyette.html` (separate logo) or
    `signature-boyette-combined.html` (combined lockup).
-3. Upload that variant's images from `assets/` via the editor's image tool (CodeTwo hosts them
-   and rewrites the `src`):
-   - separate-logo variant: `boy-logo.png`, `endorsement.png`, + the four `badge-*.png` (six total).
-   - combined-logo variant: `boyette-combined.png` + the four `badge-*.png` (five total).
+3. Images — pick one of:
+   - **Embedded (CodeTwo's own recommendation):** upload from `assets/` via the editor's image
+     tool, choosing *Embedded picture*. CodeTwo attaches them as hidden attachments, so they
+     always render and no external host can rewrite the format. For the combined variant:
+     `boyette-logo.png` + the four `badge-*.png` (five total).
+   - **Externally hosted:** replace each `src="assets/..."` with its hosted URL. Verify each URL
+     serves genuine PNG bytes before shipping — see the WebP caveat below.
 4. Save and preview to confirm dynamic fields resolve against the directory.
+
+## Hosting caveat — verify served bytes, not just the URL
+
+The interim host (ACE's WordPress + Cloudflare) serves **WebP bytes from `.png` URLs**. A WebP
+plugin generates a `.png.webp` sibling and Cloudflare caches it under the `.png` cache key with
+no `Vary: Accept`, so every recipient gets WebP regardless of their client — which the Outlook
+Word engine cannot render. The origin itself is fine; only the cached edge response is wrong.
+
+Check any candidate URL like this — a cache-buster reveals what the origin actually holds:
+
+```bash
+curl -sI "$URL"          | grep -i content-type   # what recipients get
+curl -sI "$URL?cb=$RANDOM" | grep -i content-type # what the origin holds
+```
+
+If those disagree, the CDN is serving a converted variant. Fix at the host (purge + exclude
+`/wp-content/uploads/` from the WebP rewrite), or use embedded images instead.
 
 ## Note
 Temp verification images may exist as `assets/_*.png` — safe to delete.
