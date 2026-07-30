@@ -3,29 +3,37 @@
 Dynamic, server-side signature recreated from the reference layout (left logo,
 vertical divider, right-side content with a social icon row).
 
-There are two variants of the signature — same right-side content (two locations, social row),
-different logo treatment on the left. Pick one when loading into CodeTwo.
+**Status: FINAL.** One variant, hosted assets, spec-verified against ADR 0008.
 
 ## Files
-- `signature-boyette.html` — **separate-logo variant.** The CodeTwo-ready snippet (keeps dynamic
-  `{fields}`) using the logo icon + a separate "Powered by The Purple Standard" endorsement strip.
-- `preview.html` — browser preview of the separate-logo variant (sample data).
-- `signature-boyette-combined.html` — **combined-logo variant.** Same snippet but the left cell is
-  a single combined lockup (icon + wordmark + endorsement in one image).
-- `preview-combined.html` — browser preview of the combined-logo variant (sample data).
-- `assets/boyette-logo.png` — **upload/hosting master** for the combined lockup: 380×290,
-  displays at 190×145. Derived from `boyette-combined.png`. This is the file to host.
-- `assets/boyette-combined.png` — full-resolution combined lockup: icon + "Boyette Pump & Well"
-  wordmark + "Powered by The Purple Standard" endorsement in one image, 1082×824. Master source
-  for re-exports; too large to host directly.
+- `signature-boyette-combined.html` — **the CodeTwo deliverable.** Keeps the dynamic `{fields}`;
+  the left cell is a single combined lockup (icon + wordmark + endorsement in one image). All five
+  `src` attributes are absolute `assets.purple-standard.app` URLs — paste as-is, no image upload.
+- `preview-combined.html` — browser preview with sample data. Points at the **same hosted URLs**,
+  so opening it verifies exactly what recipients will load.
+- `assets/boyette-logo.png` — the combined lockup, 380×290, displays at 190×145. **Hosted.**
+- `assets/boyette-combined.png` — full-resolution master, 1082×824. Kept only as the re-export
+  source for the recipe below; never hosted or referenced.
 - `assets/badge-google.png` / `badge-facebook.png` / `badge-instagram.png` / `badge-yelp.png`
-  — white glyph on brand-orange `#F93822` filled circles, 56×56 (display at 28px). Supersede the
-  older bare-glyph `social-*.png` (still in `assets/`, now unused).
+  — white glyph on brand-orange `#F93822` filled circles, 56×56, display at 28px. **Hosted.**
+- `assets/_src-*.svg` — Font Awesome v6.5.2 glyph sources for the badges.
 - Source logo: `../resources/boyette/BOY-LOGO-STACKED-COLOR-DARK.png` (untouched).
 
-> **`assets/boy-logo.png` and `assets/endorsement.png` were deleted**, so
-> `signature-boyette.html` (the separate-logo variant) currently references two missing
-> images. Either re-export them from the source logo or retire that variant.
+The separate-logo variant (`signature-boyette.html`, `preview.html`) was **retired** — the
+combined lockup is the final design, and its two assets (`boy-logo.png`, `endorsement.png`) are
+superseded by `boyette-logo.png`.
+
+## Hosting
+
+Assets live at `https://assets.purple-standard.app/boyette/email-signature/`, served from the
+Cloudflare-backed `ps-assets` project. The local source of truth for what gets synced is:
+
+```
+~/Developer/purple-standard/websites/ps-assets/boyette/email-signature/
+```
+
+Workflow: build the exact-spec image here in `assets/`, copy it to that folder, sync to
+Cloudflare, then re-probe the URL to confirm served bytes (see caveat below).
 
 ## Asset spec (CodeTwo + Outlook)
 
@@ -78,33 +86,23 @@ brand-orange `#F93822` filled circles, rasterized locally. Self-contained; nothi
 
 ## How to load it into CodeTwo
 1. Signature rule → **Design** step → **Edit signature** → HTML / source view.
-2. Paste the contents of your chosen variant — `signature-boyette.html` (separate logo) or
-   `signature-boyette-combined.html` (combined lockup).
-3. Images — pick one of:
-   - **Embedded (CodeTwo's own recommendation):** upload from `assets/` via the editor's image
-     tool, choosing *Embedded picture*. CodeTwo attaches them as hidden attachments, so they
-     always render and no external host can rewrite the format. For the combined variant:
-     `boyette-logo.png` + the four `badge-*.png` (five total).
-   - **Externally hosted:** replace each `src="assets/..."` with its hosted URL. Verify each URL
-     serves genuine PNG bytes before shipping — see the WebP caveat below.
-4. Save and preview to confirm dynamic fields resolve against the directory.
+2. Paste the entire contents of `signature-boyette-combined.html`.
+3. **No image upload needed** — all five `src` attributes are already absolute hosted URLs.
+4. Save and preview to confirm the dynamic fields resolve against the directory.
 
 ## Hosting caveat — verify served bytes, not just the URL
 
-The interim host (ACE's WordPress + Cloudflare) serves **WebP bytes from `.png` URLs**. A WebP
-plugin generates a `.png.webp` sibling and Cloudflare caches it under the `.png` cache key with
-no `Vary: Accept`, so every recipient gets WebP regardless of their client — which the Outlook
-Word engine cannot render. The origin itself is fine; only the cached edge response is wrong.
-
-Check any candidate URL like this — a cache-buster reveals what the origin actually holds:
+A 200 response is not proof of PNG. The previous interim host (ACE's WordPress + Cloudflare)
+returned **WebP bytes from `.png` URLs**: a WebP plugin generated a `.png.webp` sibling and
+Cloudflare cached it under the `.png` key with no `Vary: Accept`, so every recipient got WebP —
+which the Outlook Word engine cannot render. The origin was fine; only the cached edge response
+was wrong. `assets.purple-standard.app` was verified clean, but re-check after any host change:
 
 ```bash
-curl -sI "$URL"          | grep -i content-type   # what recipients get
-curl -sI "$URL?cb=$RANDOM" | grep -i content-type # what the origin holds
+U="https://assets.purple-standard.app/boyette/email-signature/boyette-logo.png"
+curl -sS -o /tmp/p.png -w '%{http_code} %{content_type}\n' "$U?cb=$RANDOM"
+file /tmp/p.png    # must report "PNG image data, 380 x 290" — not WebP
 ```
 
-If those disagree, the CDN is serving a converted variant. Fix at the host (purge + exclude
-`/wp-content/uploads/` from the WebP rewrite), or use embedded images instead.
-
-## Note
-Temp verification images may exist as `assets/_*.png` — safe to delete.
+Check the **bytes**, not the `content-type` header alone; a misconfigured host can send
+`image/png` over WebP payload.
