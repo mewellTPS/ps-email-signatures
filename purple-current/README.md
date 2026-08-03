@@ -18,11 +18,11 @@ icon row** in the same line, and the full-width "Purple up. Power on." banner. N
 - `signature-purple-current-v2.html` — the **CodeTwo deliverable** (keeps dynamic `{fields}`);
   all nine `src` attributes are absolute `assets.purple-standard.app` URLs.
 - `preview-v2.html` — browser preview (sample data), pointing at the same hosted URLs.
-- `assets/logo-v2.png` — horizontal primary-color logo, **400×174 @ 96 DPI**, display 200×87.
+- `assets/current-logo.png` — horizontal primary-color logo, **400×174 @ 96 DPI**, display 200×87.
 - `assets/endorsement.png` — "Powered by The Purple Standard" lockup, **720×34 @ 96 DPI**, display 360×17.
 - `assets/badge-*.png` — six brand-purple `#411144` circle badges (Google, Facebook, Instagram,
   LinkedIn, YouTube, Yelp), **36×36 @ 96 DPI**, display 18×18, right-aligned in the endorsement row.
-- `assets/banner-v2.jpg` — "Purple up. Power on." banner, **900×271 JPEG @ 96 DPI**, display 560×169.
+- `assets/banner-standard.jpg` — "Purple up. Power on." banner, **900×271 JPEG @ 96 DPI**, display 560×169.
 - `assets/_src-*.svg` — Font Awesome v6.5.2 glyph sources the badges are rebuilt from. **Keep these.**
 - Source files: `../purple_current/` (untouched).
 
@@ -30,10 +30,10 @@ icon row** in the same line, and the full-width "Purple up. Power on." banner. N
 
 | Asset | Display | Source | Ratio | DPI | Notes |
 |---|---|---|---|---|---|
-| `logo-v2.png` | 200×87 | 400×174 | 2.00× | 96 | metadata only; pixels bit-identical |
+| `current-logo.png` | 200×87 | 400×174 | 2.00× | 96 | metadata only; pixels bit-identical |
 | `endorsement.png` | 360×17 | 720×34 | 2.00× | 96 | rebuilt from the 3697×179 master |
 | `badge-*.png` (×6) | 18×18 | 36×36 | 2.00× | 96 | rebuilt from FA 6.5.2 |
-| `banner-v2.jpg` | 560×169 | 900×271 | **1.61×** | 96 | **documented exception — see below** |
+| `banner-standard.jpg` | 560×169 | 900×271 | **1.61×** | 96 | **documented exception — see below** |
 
 At audit on 2026-07-30 **all nine assets failed**: the logo and all six badges carried no DPI
 metadata at all, the badges were 2.22× rather than 2×, the endorsement was 150 DPI (rendering at
@@ -60,7 +60,7 @@ magick endorsement.png -density 96 -units PixelsPerInch endorsement.png
 
 ### The banner is a documented exception to ADR 0008
 
-ADR 0008 says PNG only, at exactly 2× the display size. `banner-v2.jpg` is neither, **deliberately**:
+ADR 0008 says PNG only, at exactly 2× the display size. `banner-standard.jpg` is neither, **deliberately**:
 
 - **900×271 is the largest banner that exists.** There is no higher-resolution master in the repo.
   Its display size is 560×169, so 2× would be 1120×338 — reachable only by *upscaling*, which
@@ -77,12 +77,12 @@ APP0 density fields were **patched directly in place** rather than through Image
 re-encoding a JPEG costs generation loss:
 
 ```python
-d = bytearray(open("banner-v2.jpg","rb").read())
+d = bytearray(open("banner-standard.jpg","rb").read())
 i = d.find(b"JFIF\x00")            # +7 = units, +8..9 = Xdensity, +10..11 = Ydensity
 d[i+7] = 1                          # 1 = pixels per inch
 d[i+8:i+10] = (96).to_bytes(2,"big")
 d[i+10:i+12] = (96).to_bytes(2,"big")
-open("banner-v2.jpg","wb").write(d)
+open("banner-standard.jpg","wb").write(d)
 ```
 
 Five bytes changed; pixels verified bit-identical; file size unchanged at 49,454 B.
@@ -98,7 +98,7 @@ Verify served **bytes**, not just the status code; a 200 with `image/png` can st
 which the Outlook Word engine cannot render:
 
 ```bash
-U="https://assets.purple-standard.app/current/email-signature/logo-v2.png"
+U="https://assets.purple-standard.app/current/email-signature/current-logo.png"
 curl -sS -o /tmp/p.png -w '%{http_code} %{content_type}\n' "$U?cb=$RANDOM"
 file /tmp/p.png    # must report "PNG image data, 400 x 174"
 ```
