@@ -1,0 +1,76 @@
+<!-- Purple Standard email signature — v3 (CodeTwo-ready, dynamic). -->
+<!--                                                                                     -->
+<!-- v3 is an ALTERNATIVE to v2, not an increment on it. Both answer the same brief —     -->
+<!-- show the whole portfolio in the signature — by opposite means:                       -->
+<!--                                                                                     -->
+<!--   v2  static 8-icon strip added above the endorsement; layout grows by one row.      -->
+<!--   v3  v1's layout untouched; the tps-badge slot animates, cycling all seven marks    -->
+<!--       (tps-badge, ACE, Purple Current, Boyette, WTR DR, Brisa, Tyrian) with a        -->
+<!--       horizontal-squeeze turn so each mark rotates into the next like a ball.        -->
+<!--                                                                                     -->
+<!-- So v3 deliberately has NO brand strip: the animated badge does that job, and         -->
+<!-- carrying both would say the same thing twice. Markup below is byte-for-byte v1       -->
+<!-- except the badge <img> src/alt. To see the combined variant instead, paste v2's      -->
+<!-- "Brand icons" <tr> in above the Banner row.                                          -->
+<!--                                                                                     -->
+<!-- GIF: out/ball/tps-badge-cycle.gif — 150x150 (2x of the 75px slot, ADR 0008),         -->
+<!-- 63 frames, 166 KiB, loops forever, 13.2s full cycle. Built by build-ball-gif.sh      -->
+<!-- from the treatment-C frames in out/ball-c/.                                          -->
+<!--                                                                                     -->
+<!-- Frame 0 is tps-badge on purpose: any client that declines to animate shows the       -->
+<!-- first frame, so the fallback is exactly the static badge v1 and v2 ship. The build    -->
+<!-- script asserts this by scoring frame 0 against all seven marks.                      -->
+<!--                                                                                     -->
+<!-- Caveat worth knowing before this goes near CodeTwo: animated GIFs are widely         -->
+<!-- supported in mail clients now, but reports from mid-2026 suggest signature           -->
+<!-- platforms are tightening on them. Confirm CodeTwo still accepts an animated GIF in   -->
+<!-- a template before committing to v3. If it strips or flattens the file, v3 degrades   -->
+<!-- to exactly v1 rather than breaking, which is why frame 0 matters.                    -->
+<!--                                                                                     -->
+<!-- BEFORE LOADING INTO CODETWO: upload the GIF next to the existing hosted assets and   -->
+<!-- swap the relative src for                                                            -->
+<!--   https://assets.purple-standard.app/standard/email-signature/tps-badge-cycle.gif    -->
+<!-- then verify served bytes with a cache-buster (ADR 0008) — a 200 carrying WebP or a   -->
+<!-- flattened first frame is the failure mode to look for, and it is invisible in a      -->
+<!-- status code.                                                                          -->
+<table cellspacing="0" cellpadding="0" id="ps-signature" style="width: 500px; border-collapse: collapse; line-height: initial">
+  <tbody>
+    <tr>
+      <td style="width: 400px; height: auto; padding: 0 0 8px 0; vertical-align: top" colspan="3">
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 12pt; color: #49104F" data-codetwo-visible="Name">
+          <b>{First name} {Last name}</b>
+        </p>
+        <p style="margin: 2pt 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #49104F" data-codetwo-visible="Job title">
+          <b>{RT}{Title}{/RT}</b>
+        </p>
+      </td>
+      <td style="width: 90px; height: auto; padding: 0; vertical-align: top" rowspan="2">
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 10pt; text-align: right" data-codetwo-visible="Logo">
+          <a href="https://www.purple-standard.com" target="_blank"><img src="out/ball/tps-badge-cycle.gif" border="0" alt="Purple Standard — ACE, Purple Current, Boyette, WTR DR, Brisa Climate, Tyrian Roofing" width="75" height="75" style="width: 75px; height: 75px"></a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 400px; height: auto; padding: 0; vertical-align: top" colspan="3">
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #808080" data-codetwo-visible="Phone">
+          <b style="color: #49104F">T:</b> <a href="tel:+18133039975" style="color: #808080; text-decoration: none">(813) 303-9975</a>{RT}&nbsp;&nbsp;&nbsp;<b style="color: #49104F">M:</b> <a href="tel:{Mobile}" style="color: #808080; text-decoration: none">{Mobile}</a>{/RT}
+        </p>
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #808080" data-codetwo-visible="Email">
+          <b style="color: #49104F">E:</b> <a href="mailto:{E-mail}" style="color: #A263D2; text-decoration: none">{E-mail}</a>
+        </p>
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #808080" data-codetwo-visible="Website">
+          <a href="https://www.purple-standard.com" target="_blank" style="color: #A263D2; text-decoration: none"><b>www.purple-standard.com</b></a>
+        </p>
+        <p style="margin: 4pt 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #808080" data-codetwo-visible="Company address">8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638</p>
+      </td>
+    </tr>
+    <tr data-codetwo-visible="Banner">
+      <td style="width: 500px; height: auto; padding: 14px 0 0 0; vertical-align: top" colspan="4">
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 10pt">
+          <a href="https://www.purple-standard.com" target="_blank"><img src="https://assets.purple-standard.app/standard/email-signature/tps-endorsement.png" border="0" alt="Powered by The Purple Standard" width="500" height="24" style="width: 500px; height: 24px"></a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 10pt"><br></p>

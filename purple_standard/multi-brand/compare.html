@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PS signature v2 — brand-strip icon treatments</title>
+<style>
+  :root {
+    --ps-purple: #49104F;
+    --ps-link: #A263D2;
+    --ink: #1c1c1e;
+    --muted: #6b6b70;
+    --line: #e4e4e8;
+    --bg: #f6f6f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  header {
+    background: #fff; border-bottom: 1px solid var(--line);
+    padding: 22px 28px 18px;
+  }
+  h1 { margin: 0 0 4px; font-size: 19px; letter-spacing: -0.01em; color: var(--ps-purple); }
+  header p { margin: 0; color: var(--muted); font-size: 13.5px; max-width: 76ch; }
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; gap: 2px; padding: 0 28px;
+    background: #fff; border-bottom: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  }
+  nav button {
+    appearance: none; border: 0; background: none; cursor: pointer;
+    font: 600 13.5px/1 inherit; color: var(--muted);
+    padding: 14px 16px; border-bottom: 2.5px solid transparent;
+    margin-bottom: -1px;
+  }
+  nav button:hover { color: var(--ink); }
+  nav button[aria-selected="true"] { color: var(--ps-purple); border-bottom-color: var(--ps-purple); }
+  nav button .rec {
+    display: inline-block; margin-left: 7px; padding: 2px 6px; border-radius: 999px;
+    background: var(--ps-purple); color: #fff; font-size: 10px; letter-spacing: .04em;
+    text-transform: uppercase; vertical-align: 1px;
+  }
+  main { padding: 26px 28px 80px; max-width: 1080px; }
+  .panel { display: none; }
+  .panel.on { display: block; }
+  .note {
+    background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--ps-purple);
+    border-radius: 5px; padding: 13px 16px; margin: 0 0 24px; font-size: 13.5px; color: #38383d;
+  }
+  .note b { color: var(--ps-purple); }
+  h2 {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--muted); margin: 30px 0 10px; font-weight: 700;
+  }
+  h2:first-of-type { margin-top: 0; }
+  .stage {
+    background: #fff; border: 1px solid var(--line); border-radius: 6px;
+    padding: 26px 28px;
+  }
+  .stage.zoom { padding: 20px 28px; }
+  .zoomrow { display: flex; gap: 22px; align-items: flex-end; flex-wrap: wrap; }
+  .zoomrow figure { margin: 0; text-align: center; width: 96px; }
+  .zoomrow img { width: 80px; height: 80px; display: block; margin: 0 auto 7px; }
+  .zoomrow figcaption { font-size: 10.5px; color: var(--muted); line-height: 1.3; }
+  .caption { margin: 9px 0 0; font-size: 12px; color: var(--muted); }
+  table.sig { border-collapse: collapse; }
+  .sidebyside { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 1000px) { .sidebyside { grid-template-columns: 1fr 1fr; } }
+  .col h3 {
+    font-size: 12px; margin: 0 0 10px; color: var(--ps-purple);
+    text-transform: uppercase; letter-spacing: .07em;
+  }
+  .diffmark { background: #fffbe6; outline: 2px dashed #d9a300; outline-offset: 3px; }
+  .legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
+  .legend span { display: inline-block; width: 11px; height: 11px; background: #fffbe6;
+    border: 1px dashed #d9a300; vertical-align: -1px; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Purple Standard signature v2 — brand-strip icon treatments</h1>
+  <p>Same signature four ways. <b>C is the selected treatment</b>; the others are kept as demo material. The only thing changing between tabs is how the brand
+     icons are normalized. Everything else is identical to the live v1 signature. Icons are
+     shown at real size (40&nbsp;px) in the signature, then enlarged below for inspection.</p>
+</header>
+
+<nav id="tabs">
+  <button data-set="c-native" aria-selected="true">C · Native shapes <span class="rec">chosen</span></button>
+  <button data-set="d-hybrid" aria-selected="false">D · Hybrid</button>
+  <button data-set="a-plain"  aria-selected="false">A · Plain discs</button>
+  <button data-set="b-ring"   aria-selected="false">B · Ring on all</button>
+  <button data-set="v1"       aria-selected="false">v1 reference</button>
+</nav>
+
+<main>
+
+  <!-- ==================== treatment panels ==================== -->
+  <section class="panel" data-panel="d-hybrid">
+    <p class="note"><b>D · Hybrid.</b> <i>(alternative, kept for future demos.)</i> Marks that are already circles (ACE, Purple Current,
+      Boyette) run full-bleed and bare, so they use the whole 40&nbsp;px. The marks with no field of their own get a white field and a thin brand ring: WTR DR's drop
+      (cropped off the wordmark, which is illegible this small), Tyrian's shield and Brisa's bear. MOR and ENG
+      sit light so they read as pending rather than as content.</p>
+    <div data-sig></div>
+    <h2>Icons enlarged 2×</h2>
+    <div class="stage zoom"><div class="zoomrow" data-zoom></div></div>
+  </section>
+
+  <section class="panel" data-panel="a-plain">
+    <p class="note"><b>A · Plain discs.</b> No rings anywhere. Cleanest in isolation, but on a
+      white email background WTR DR and Tyrian have no visible edge — they read as loose glyphs
+      floating beside solid discs, and the row loses its rhythm.</p>
+    <div data-sig></div>
+    <h2>Icons enlarged 2×</h2>
+    <div class="stage zoom"><div class="zoomrow" data-zoom></div></div>
+  </section>
+
+  <section class="panel" data-panel="b-ring">
+    <p class="note"><b>B · Ring on all.</b> Every icon gets a white field and a brand ring —
+      maximum consistency, and it echoes the tps-badge's own ring. The cost is real: the four
+      naturally-round marks become circles inside circles, which shrinks each mark by about a
+      third and makes ACE and Boyette muddy at 40&nbsp;px.</p>
+    <div data-sig></div>
+    <h2>Icons enlarged 2×</h2>
+    <div class="stage zoom"><div class="zoomrow" data-zoom></div></div>
+  </section>
+
+  <section class="panel on" data-panel="c-native">
+    <p class="note"><b>C · Native shapes — selected.</b> No shape forcing — each asset is only trimmed and
+      scaled to fit. Honest to the source files, but it exposes why they need editing: WTR DR's
+      "WTR DR" wordmark is unreadable mush at 40&nbsp;px, and Tyrian's shield and Brisa's bear
+      are taller than the discs, so the row's baseline wobbles.</p>
+    <div data-sig></div>
+    <h2>Strip spacing — which right edge do you want?</h2>
+    <p class="note" style="border-left-color:#d9a300">The strip is the only block in the
+      signature that doesn't span the full 500&nbsp;px, so its right edge doesn't line up with
+      the endorsement bar underneath it. <b>Tight</b> keeps the icons reading as one group
+      (closest to your mockup). <b>Justified</b> spreads them so the strip and the endorsement
+      bar share the same right edge.</p>
+    <div class="stage">
+      <h3 style="font-size:12px;margin:0 0 8px;color:var(--ps-purple)">Tight — 12&nbsp;px gaps, 404&nbsp;px wide</h3>
+      <div data-strip="tight"></div>
+      <h3 style="font-size:12px;margin:26px 0 8px;color:var(--ps-purple)">Justified — evenly spread to 500&nbsp;px</h3>
+      <div data-strip="justified"></div>
+    </div>
+    <h2>Icons enlarged 2×</h2>
+    <div class="stage zoom"><div class="zoomrow" data-zoom></div></div>
+  </section>
+
+  <!-- ==================== v1 reference ==================== -->
+  <section class="panel" data-panel="v1">
+    <p class="note"><b>v1 vs v2.</b> v2 is v1 with one row inserted. Everything else — Arial
+      stack, the website URL line, the address wording, the hosted badge and endorsement URLs,
+      the 500&nbsp;px table — is byte-for-byte v1. The inserted row is highlighted.</p>
+    <div class="sidebyside">
+      <div class="col">
+        <h3>v1 — live</h3>
+        <div class="stage"><div data-sig-v1></div></div>
+      </div>
+      <div class="col">
+        <h3>v2 — proposed (hybrid icons)</h3>
+        <div class="stage"><div data-sig-v2diff></div></div>
+      </div>
+    </div>
+    <p class="legend"><span></span> the only difference between v1 and v2</p>
+  </section>
+
+</main>
+
+<script>
+// ---------------------------------------------------------------------------
+// One signature template. `ICONDIR` is the only thing a tab changes.
+// Markup below is the shipped v2 markup verbatim, so what you see is what
+// CodeTwo gets.
+// ---------------------------------------------------------------------------
+const HOST  = 'https://assets.purple-standard.app/standard/email-signature';
+const FONT  = "Arial, Helvetica, sans-serif";
+
+const BRANDS = [
+  ['brand-ace',            'ACE Septic &amp; Waste',  'ACE Septic & Waste'],
+  ['brand-purple-current', 'Purple Current',          'Purple Current'],
+  ['brand-boyette',        'Boyette Pump &amp; Well', 'Boyette Pump & Well'],
+  ['brand-wtr-dr',         'WTR DR',                  'WTR DR'],
+  ['brand-brisa',          'Brisa Climate',           'Brisa Climate'],
+  ['brand-tyrian',         'Tyrian Roofing',          'Tyrian Roofing'],
+  ];
+
+// spacing: 'tight' = fixed 12px gutters, strip is 404px wide.
+// 'justified' = each of the 8 cells is 1/8 of 500px with the icon centred, so the
+// strip's outer edges match the 500px endorsement bar below it.
+function brandRow(dir, spacing = 'tight') {
+  const justified = spacing === 'justified';
+  const cells = BRANDS.map(([file, title, alt], i) => {
+    const style = justified
+      ? `width: 83px; padding: 0; text-align: ${i === 0 ? 'left' : i === BRANDS.length - 1 ? 'right' : 'center'}; vertical-align: middle`
+      : `padding: ${i === BRANDS.length - 1 ? '0' : '0 12px 0 0'}; vertical-align: middle`;
+    return `<td style="${style}"><a href="https://www.purple-standard.com" target="_blank" title="${title}"><img src="${dir}/${file}.png" border="0" alt="${alt}" width="40" height="40" style="width: 40px; height: 40px"></a></td>`;
+  }).join('');
+  const tableStyle = justified
+    ? 'width: 500px; border-collapse: collapse; table-layout: fixed'
+    : 'border-collapse: collapse';
+  return `<table cellspacing="0" cellpadding="0" style="${tableStyle}"><tbody><tr>${cells}</tr></tbody></table>`;
+}
+
+function signature({ dir, withBrandRow = true, markDiff = false, spacing = 'tight' }) {
+  const mark = markDiff ? ' class="diffmark"' : '';
+  const row = withBrandRow ? `
+    <tr data-codetwo-visible="Brand icons">
+      <td${mark} style="width: 500px; height: auto; padding: 12px 0 0 0; vertical-align: middle" colspan="4">
+        ${brandRow(dir, spacing)}
+      </td>
+    </tr>` : '';
+
+  return `
+<table cellspacing="0" cellpadding="0" class="sig" style="width: 500px; border-collapse: collapse; line-height: initial">
+  <tbody>
+    <tr>
+      <td style="width: 400px; height: auto; padding: 0 0 8px 0; vertical-align: top" colspan="3">
+        <p style="margin: 0.1pt; font-family: ${FONT}; font-size: 12pt; color: #49104F"><b>{First name} {Last name}</b></p>
+        <p style="margin: 2pt 0 0 0; font-family: ${FONT}; font-size: 10pt; color: #49104F"><b>{RT}{Title}{/RT}</b></p>
+      </td>
+      <td style="width: 90px; height: auto; padding: 0; vertical-align: top" rowspan="2">
+        <p style="margin: 0.1pt; font-family: ${FONT}; font-size: 10pt; text-align: right"><a href="https://www.purple-standard.com" target="_blank"><img src="${HOST}/tps-badge.png" border="0" alt="Purple Standard" width="75" height="75" style="width: 75px; height: 75px"></a></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 400px; height: auto; padding: 0; vertical-align: top" colspan="3">
+        <p style="margin: 0.1pt; font-family: ${FONT}; font-size: 9pt; color: #808080"><b style="color: #49104F">T:</b> <a href="tel:+18133039975" style="color: #808080; text-decoration: none">(813) 303-9975</a>{RT}&nbsp;&nbsp;&nbsp;<b style="color: #49104F">M:</b> <a href="tel:{Mobile}" style="color: #808080; text-decoration: none">{Mobile}</a>{/RT}</p>
+        <p style="margin: 0.1pt; font-family: ${FONT}; font-size: 9pt; color: #808080"><b style="color: #49104F">E:</b> <a href="mailto:{E-mail}" style="color: #A263D2; text-decoration: none">{E-mail}</a></p>
+        <p style="margin: 0.1pt; font-family: ${FONT}; font-size: 9pt; color: #808080"><a href="https://www.purple-standard.com" target="_blank" style="color: #A263D2; text-decoration: none"><b>www.purple-standard.com</b></a></p>
+        <p style="margin: 4pt 0 0 0; font-family: ${FONT}; font-size: 9pt; color: #808080">8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638</p>
+      </td>
+    </tr>${row}
+    <tr>
+      <td style="width: 500px; height: auto; padding: 14px 0 0 0; vertical-align: top" colspan="4">
+        <p style="margin: 0.1pt; font-family: ${FONT}; font-size: 10pt"><a href="https://www.purple-standard.com" target="_blank"><img src="${HOST}/tps-endorsement.png" border="0" alt="Powered by The Purple Standard" width="500" height="24" style="width: 500px; height: 24px"></a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>`;
+}
+
+// render each treatment panel
+document.querySelectorAll('.panel[data-panel]').forEach(panel => {
+  const set = panel.dataset.panel;
+  if (set === 'v1') return;
+  const dir = `out/${set}`;
+  panel.querySelector('[data-sig]').innerHTML =
+    `<div class="stage">${signature({ dir })}</div>
+     <p class="caption">Rendered at the real 500&nbsp;px width, icons at their real 40&nbsp;px.</p>`;
+  panel.querySelector('[data-zoom]').innerHTML = BRANDS.map(([f, , alt]) =>
+    `<figure><img src="${dir}/${f}.png" alt="${alt}"><figcaption>${alt}</figcaption></figure>`
+  ).join('');
+  // spacing comparison (D panel only) — full signatures so the right edge vs the
+  // endorsement bar is actually visible, which is the whole question.
+  panel.querySelectorAll('[data-strip]').forEach(el => {
+    el.innerHTML = signature({ dir, spacing: el.dataset.strip });
+  });
+});
+
+// v1 reference panel
+document.querySelector('[data-sig-v1]').innerHTML =
+  signature({ dir: 'out/c-native', withBrandRow: false });
+document.querySelector('[data-sig-v2diff]').innerHTML =
+  signature({ dir: 'out/c-native', withBrandRow: true, markDiff: true });
+
+// tabs
+const tabs = document.getElementById('tabs');
+tabs.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  tabs.querySelectorAll('button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+  document.querySelectorAll('.panel').forEach(p =>
+    p.classList.toggle('on', p.dataset.panel === b.dataset.set));
+  window.scrollTo({ top: 0 });
+});
+</script>
+</body>
+</html>
