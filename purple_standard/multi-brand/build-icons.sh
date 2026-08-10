@@ -170,10 +170,16 @@ white_disc_mark "$WORK/brisa-bear.png"   "$C_BRISA" $RW 0.62 80 "$OUT/b-ring/bra
 white_disc_mark "$WORK/wtr-drop.png"     "$C_WTR"   $RW 0.56 80 "$OUT/b-ring/brand-wtr-dr.png"
 white_disc_mark "$WORK/tyr-shield.png"   "$C_TYR"   $RW 0.60 80 "$OUT/b-ring/brand-tyrian.png"
 white_disc_mark "$WORK/m.png"            "$C_PENDING" $RW 0.01 80 "$WORK/pending-blank.png"
+# These two write their final PNG directly rather than through fin(), so they need
+# the same include-chunk allowlist. Without it ImageMagick stamps a tIME chunk (a
+# wall-clock timestamp), which makes the build non-reproducible: identical pixels,
+# different bytes on every run, so git reports drift that isn't there.
 magick "$WORK/pending-blank.png" -font "$FONT" -pointsize 23 -fill "#8A8A8A" \
-  -gravity center -annotate +0+0 "MOR" -units PixelsPerInch -density 96 "$OUT/b-ring/brand-mor.png"
+  -gravity center -annotate +0+0 "MOR" -units PixelsPerInch -density 96 \
+  -define png:include-chunk=none,gAMA,pHYs,tRNS "$OUT/b-ring/brand-mor.png"
 magick "$WORK/pending-blank.png" -font "$FONT" -pointsize 23 -fill "#8A8A8A" \
-  -gravity center -annotate +0+0 "ENG" -units PixelsPerInch -density 96 "$OUT/b-ring/brand-eng.png"
+  -gravity center -annotate +0+0 "ENG" -units PixelsPerInch -density 96 \
+  -define png:include-chunk=none,gAMA,pHYs,tRNS "$OUT/b-ring/brand-eng.png"
 
 # ---------------------------------------------------------------------------
 # TREATMENT C — native shapes, normalized size only
