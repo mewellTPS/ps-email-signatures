@@ -1,0 +1,49 @@
+<!-- Purple Standard email signature — STANDARDIZED DEFAULT (brand strip, 36px icons). CodeTwo-ready, dynamic. -->
+<!-- Standardized for all Purple Standard accounts: no per-user content is hardcoded. Every personal    -->
+<!-- field ({First name} {Last name} {Title} {Phone} {Mobile} {E-mail}) resolves from Entra via CodeTwo. -->
+<!--                                                                                              -->
+<!-- Placement A: the 6-brand icon strip sits directly below the website line; the street-address -->
+<!-- line is dropped. Two dynamic phone lines are shown: T: {Phone} (business) and M: {Mobile}.   -->
+<!-- Each phone line is wrapped in {RT}...{/RT} so the WHOLE line (label + number) is removed when -->
+<!-- that Entra field is empty. The title is likewise {RT}-wrapped. Each brand icon links to its  -->
+<!-- own site. The three section seams (title/phone, website/icons, icons/endorsement) share 6px.  -->
+<!--                                                                                              -->
+<!-- BEFORE THIS RENDERS: upload the six brand PNGs (multi-brand/upload-to-hosting/brand-<slug>.png) to -->
+<!--   https://assets.purple-standard.app/standard/email-signature/     -->
+<!-- The badge and endorsement are already hosted there. Verify served BYTES with a cache-buster   -->
+<!-- (ADR 0008): a 200 carrying WebP from a .png URL breaks the Outlook Word engine.               -->
+<!-- Icons display at 36px; source PNGs are 80x80 @96 DPI (>=2x at this size).                 -->
+<!-- Re-insert {First name} {Last name} {Title} {Phone} {Mobile} {E-mail} via CodeTwo's Placeholder -->
+<!-- ribbon, not by trusting the pasted text (typed placeholders can fail to bind to Entra ID).      -->
+<table cellspacing="0" cellpadding="0" id="ps-signature" style="width: 500px; border-collapse: collapse; line-height: initial">
+  <tbody>
+    <tr>
+      <td style="width: 400px; height: auto; padding: 0 0 6px 0; vertical-align: top" colspan="3">
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 12pt; line-height: 1.2; color: #49104F" data-codetwo-visible="Name"><b>{First name} {Last name}</b></p>
+        <p style="margin: 2pt 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.2; color: #49104F" data-codetwo-visible="Job title"><b>{RT}{Title}{/RT}</b></p>
+      </td>
+      <td style="width: 90px; height: auto; padding: 0; vertical-align: top; line-height: 0" rowspan="2">
+        <p style="margin: 0.1pt; text-align: right; line-height: 0" data-codetwo-visible="Logo">
+          <a href="https://www.purple-standard.com" target="_blank"><img src="https://assets.purple-standard.app/standard/email-signature/tps-badge.png" border="0" alt="Purple Standard" width="75" height="75" style="width: 75px; height: 75px; display: inline-block"></a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 400px; height: auto; padding: 0; vertical-align: top" colspan="3">
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Phone">{RT}<b style="color: #49104F">T:</b> <a href="tel:{Phone}" style="color: #808080; text-decoration: none">{Phone}</a>{/RT}</p>
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Mobile">{RT}<b style="color: #49104F">M:</b> <a href="tel:{Mobile}" style="color: #808080; text-decoration: none">{Mobile}</a>{/RT}</p>
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Email"><b style="color: #49104F">E:</b> <a href="mailto:{E-mail}" style="color: #A263D2; text-decoration: none">{E-mail}</a></p>
+        <p style="margin: 0.1pt 0.1pt 6px 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Website"><a href="https://www.purple-standard.com" target="_blank" style="color: #A263D2; text-decoration: none"><b>www.purple-standard.com</b></a></p>
+        <div style="line-height: 0" data-codetwo-visible="Brand icons"><table cellspacing="0" cellpadding="0" style="border-collapse: collapse; line-height: 0"><tbody><tr><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://www.acesepticandwaste.com/" target="_blank" title="ACE Septic &amp; Waste"><img src="https://assets.purple-standard.app/standard/email-signature/brand-ace.png" border="0" alt="ACE Septic &amp; Waste" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://purple-current.com/" target="_blank" title="Purple Current"><img src="https://assets.purple-standard.app/standard/email-signature/brand-purple-current.png" border="0" alt="Purple Current" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://www.boyettepumpwell.com/" target="_blank" title="Boyette Pump &amp; Well"><img src="https://assets.purple-standard.app/standard/email-signature/brand-boyette.png" border="0" alt="Boyette Pump &amp; Well" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://wtrdr.com/" target="_blank" title="WTR DR"><img src="https://assets.purple-standard.app/standard/email-signature/brand-wtr-dr.png" border="0" alt="WTR DR" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://brisaclimate.com/" target="_blank" title="Brisa Climate"><img src="https://assets.purple-standard.app/standard/email-signature/brand-brisa.png" border="0" alt="Brisa Climate" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0; vertical-align: middle; line-height: 0"><a href="https://tyrianroofing.com/" target="_blank" title="Tyrian Roofing"><img src="https://assets.purple-standard.app/standard/email-signature/brand-tyrian.png" border="0" alt="Tyrian Roofing" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td></tr></tbody></table></div>
+      </td>
+    </tr>
+    <tr data-codetwo-visible="Banner">
+      <td style="width: 500px; height: auto; padding: 6px 0 0 0; vertical-align: top; line-height: 0" colspan="4">
+        <p style="margin: 0.1pt; line-height: 0">
+          <a href="https://www.purple-standard.com" target="_blank"><img src="https://assets.purple-standard.app/standard/email-signature/tps-endorsement.png" border="0" alt="Powered by The Purple Standard" width="500" height="24" style="width: 500px; height: 24px; display: block"></a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 10pt"><br></p>
