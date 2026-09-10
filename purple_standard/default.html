@@ -1,20 +1,19 @@
-<!-- Purple Standard email signature — STANDARDIZED DEFAULT (brand strip, 36px icons). CodeTwo-ready, dynamic. -->
-<!-- Standardized for all Purple Standard accounts: no per-user content is hardcoded. Every personal    -->
-<!-- field ({First name} {Last name} {Title} {Phone} {Mobile} {E-mail}) resolves from Entra via CodeTwo. -->
+<!-- Purple Standard email signature - STANDARDIZED DEFAULT (brand strip, 36px icons). CodeTwo-ready, dynamic. -->
+<!-- No per-user content is hardcoded. Name, Title, Phone, Mobile, and E-mail resolve from Entra via CodeTwo; -->
+<!-- each phone line is wrapped in RT tags (see body) so the whole line - label and number - is removed when -->
+<!-- that Entra field is empty. The title is RT-wrapped the same way. Company address is static (shared office). -->
+<!-- NOTE: keep RT tags and placeholders in the signature body only. Do not write brace tokens in comments - -->
+<!-- CodeTwo scans the whole source and treats a stray brace token in a comment as a malformed RT tag. -->
 <!--                                                                                              -->
-<!-- Placement A: the 6-brand icon strip sits directly below the website line; the street-address -->
-<!-- line is dropped. Two dynamic phone lines are shown: T: {Phone} (business) and M: {Mobile}.   -->
-<!-- Each phone line is wrapped in {RT}...{/RT} so the WHOLE line (label + number) is removed when -->
-<!-- that Entra field is empty. The title is likewise {RT}-wrapped. Each brand icon links to its  -->
-<!-- own site. The three section seams (title/phone, website/icons, icons/endorsement) share 6px.  -->
+<!-- Placement A: the 6-brand icon strip sits directly below the address line. Each brand icon links to its -->
+<!-- own site. The section seams share one 6px gap. -->
 <!--                                                                                              -->
 <!-- BEFORE THIS RENDERS: upload the six brand PNGs (multi-brand/upload-to-hosting/brand-<slug>.png) to -->
-<!--   https://assets.purple-standard.app/standard/email-signature/     -->
-<!-- The badge and endorsement are already hosted there. Verify served BYTES with a cache-buster   -->
-<!-- (ADR 0008): a 200 carrying WebP from a .png URL breaks the Outlook Word engine.               -->
-<!-- Icons display at 36px; source PNGs are 80x80 @96 DPI (>=2x at this size).                 -->
-<!-- Re-insert {First name} {Last name} {Title} {Phone} {Mobile} {E-mail} via CodeTwo's Placeholder -->
-<!-- ribbon, not by trusting the pasted text (typed placeholders can fail to bind to Entra ID).      -->
+<!--   https://assets.purple-standard.app/standard/email-signature/   (badge + endorsement already hosted). -->
+<!-- Verify served BYTES with a cache-buster (ADR 0008): a 200 carrying WebP from a .png URL breaks Outlook. -->
+<!-- Icons display at 36px; source PNGs are 80x80 @96 DPI (>=2x at this size). -->
+<!-- Re-insert the Name, Title, Phone, Mobile, and E-mail placeholders via CodeTwo's Placeholder ribbon -->
+<!-- rather than trusting the pasted text (typed placeholders can fail to bind to Entra ID). -->
 <table cellspacing="0" cellpadding="0" id="ps-signature" style="width: 500px; border-collapse: collapse; line-height: initial">
   <tbody>
     <tr>
@@ -33,7 +32,8 @@
         <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Phone">{RT}<b style="color: #49104F">T:</b> <a href="tel:{Phone}" style="color: #808080; text-decoration: none">{Phone}</a>{/RT}</p>
         <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Mobile">{RT}<b style="color: #49104F">M:</b> <a href="tel:{Mobile}" style="color: #808080; text-decoration: none">{Mobile}</a>{/RT}</p>
         <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Email"><b style="color: #49104F">E:</b> <a href="mailto:{E-mail}" style="color: #A263D2; text-decoration: none">{E-mail}</a></p>
-        <p style="margin: 0.1pt 0.1pt 6px 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Website"><a href="https://www.purple-standard.com" target="_blank" style="color: #A263D2; text-decoration: none"><b>www.purple-standard.com</b></a></p>
+        <p style="margin: 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080" data-codetwo-visible="Website"><a href="https://www.purple-standard.com" target="_blank" style="color: #A263D2; text-decoration: none"><b>www.purple-standard.com</b></a></p>
+        <p style="margin: 0.1pt 0.1pt 6px 0.1pt; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.2; color: #808080">8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638</p>
         <div style="line-height: 0" data-codetwo-visible="Brand icons"><table cellspacing="0" cellpadding="0" style="border-collapse: collapse; line-height: 0"><tbody><tr><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://www.acesepticandwaste.com/" target="_blank" title="ACE Septic &amp; Waste"><img src="https://assets.purple-standard.app/standard/email-signature/brand-ace.png" border="0" alt="ACE Septic &amp; Waste" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://purple-current.com/" target="_blank" title="Purple Current"><img src="https://assets.purple-standard.app/standard/email-signature/brand-purple-current.png" border="0" alt="Purple Current" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://www.boyettepumpwell.com/" target="_blank" title="Boyette Pump &amp; Well"><img src="https://assets.purple-standard.app/standard/email-signature/brand-boyette.png" border="0" alt="Boyette Pump &amp; Well" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://wtrdr.com/" target="_blank" title="WTR DR"><img src="https://assets.purple-standard.app/standard/email-signature/brand-wtr-dr.png" border="0" alt="WTR DR" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0 12px 0 0; vertical-align: middle; line-height: 0"><a href="https://brisaclimate.com/" target="_blank" title="Brisa Climate"><img src="https://assets.purple-standard.app/standard/email-signature/brand-brisa.png" border="0" alt="Brisa Climate" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td><td style="padding: 0; vertical-align: middle; line-height: 0"><a href="https://tyrianroofing.com/" target="_blank" title="Tyrian Roofing"><img src="https://assets.purple-standard.app/standard/email-signature/brand-tyrian.png" border="0" alt="Tyrian Roofing" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td></tr></tbody></table></div>
       </td>
     </tr>
