@@ -3,3 +3,6 @@
 
 # macOS
 .DS_Store
+
+# Build intermediates (re-created every run)
+_work/
