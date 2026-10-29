@@ -128,8 +128,8 @@ def signature(pledge=False):
     contact = "\n        ".join([
         p(f"font-size: 13pt; line-height: 1.15; color: {INK}", f"<b>{PERSON['name']}</b>", "Name"),
         p(f"margin: 2px 0 0 0; font-size: 10pt; color: {NAVY}", PERSON["title"], "Job title"),
-        p(f"margin: 8px 0 0 0; {line}", tel("O", PERSON["office"], PERSON["office_tel"])
-          + "&nbsp;&nbsp;&nbsp;" + tel("M", PERSON["mobile"], PERSON["mobile_tel"]), "Phone"),
+        p(f"margin: 8px 0 0 0; {line}", tel(PERSON.get("office_label", "O"), PERSON["office"], PERSON["office_tel"])
+          + ("&nbsp;&nbsp;&nbsp;" + tel("M", PERSON["mobile"], PERSON["mobile_tel"]) if PERSON.get("mobile") else ""), "Phone"),
         p(line, f'<b style="color: {NAVY}">E:</b> <a href="mailto:{PERSON["email"]}" style="color: {TEXT}; text-decoration: none">{PERSON["email"]}</a>', "Email"),
         *(p(line, a, "Company address") for a in ADDRESS),
         p(line, f'<a href="https://acesepticandwaste.com" target="_blank" style="color: {LINK_GREEN}; text-decoration: none"><b>acesepticandwaste.com</b></a>', "Website"),

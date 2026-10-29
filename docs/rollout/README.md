@@ -1,0 +1,42 @@
+# Soft-launch rollout (2026-10-29)
+
+Fifteen hardcoded CodeTwo cloud rules, one per sender address, went live on 2026-10-29. Every field is
+hardcoded until Ntiva fixes Entra job titles; then people move back to the brand `default.html`
+(see `docs/entra-fixes.md`). Faith's ACE rule (`09-ace-faith-collier.html`) is built but not created yet.
+
+## Files
+
+| Path | What |
+|---|---|
+| `paste/NN-*.html` | Generated paste source per rule (with comments). Built by `docs/review/build-rollout.py`. |
+| `paste-clean/NN-*.html` | The same with comments stripped: **exactly what is in CodeTwo** (verified by clipboard round-trip). |
+| `codetwo-before/*.html` | The template each edited rule had before 2026-10-29. Paste one back to roll a rule back. |
+| `stage-assets.py` | Copies the images the paste files need into ps-assets; never overwrites. Dry run by default. |
+| `verify-live.py` | Checks every ps-assets file against assets.purple-standard.app by SHA-256. |
+| `../../shared-mailbox/*.html` | Backup copy/paste files for the PS shared mailboxes. CodeTwo signs these addresses; paste only if a rule is turned off. |
+
+## What was verified
+
+- ps-assets deployed by Michael (dashboard upload); `verify-live.py` 62/62 match. Before the deploy the same check found the 26 new files missing (positive control).
+- Each rule's template was copied back out of the CodeTwo source editor and diffed against `paste-clean/`: identical for all 15. Every image URL in each file returned 200.
+- CodeTwo Test Rules, sender chosen with **Select** (the From box is read-only and silently defaults to the signed-in user): each of the 15 addresses applied its own rule and no other.
+
+## Rule map
+
+| Rule | Sender | Was |
+|---|---|---|
+| BPW - Danny Boyette | dboyette@BoyettePumpWell.com | Boyette |
+| WTR - Sean Myatt | smyatt@wtrdr.com | WTR DR |
+| PC - Kenny Morrow | kmorrow@purple-current.com | Purple Current |
+| BRS - Victor Rodriguez | vrodriguez@brisaclimate.com | Brisa Climate |
+| TYR - John Rodrigues | Jrodrigues@tyrianroofing.com | Tyrian Roofing |
+| ACE - Ryan Clarke | rclarke@acesepticandwaste.com | ACE Septic Ryan (was unpublished, no design) |
+| ACE - Nan Mallory | nmallory@acesepticandwaste.com | new (split from Nan Shared Mailbox) |
+| ACE - Kelly Lanzone | klanzone@acesepticandwaste.com | new (split from Kelly Shared Mailbox) |
+| PS - Brady Bodden | bbodden@purple-standard.com | Purple Standard (jirvine, mewell removed) |
+| PS - Michael Ewell | mewell@purple-standard.com | new |
+| PS - Josh Irvine | jirvine@purple-standard.com | new |
+| PS - Nan Mallory (shared mailbox) | nmallory@purple-standard.com | Purple Standard - Nan Shared Mailbox |
+| PS - Ryan Clarke (shared mailbox) | rclarke@purple-standard.com | Purple Standard - Ryan Shared Mailbox (was unpublished, no design) |
+| PS - Faith Collier | fcollier@purple-standard.com | Purple Standard - Faith |
+| PS - Kelly Lanzone (shared mailbox) | klanzone@purple-standard.com | Purple Standard - Kelly Shared Mailbox |

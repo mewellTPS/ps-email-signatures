@@ -32,7 +32,7 @@ DARK_BG = "#1E1E1E"
 
 PERSON = {
     "name": "Kenny Morrow",       # Michael, 2026-10-28; live signature shows "K. Morrow"
-    "title": "Owner/Founder",     # Michael, 2026-10-28; Entra has none
+    "title": "Operator",          # Michael, 2026-10-29; hardcoded until Ntiva fixes Entra
     "phone": "(813) 355-0865",
     "tel": "+18133550865",
     "email": "kmorrow@purple-current.com",

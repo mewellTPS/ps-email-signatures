@@ -37,7 +37,7 @@ DARK_BG = "#1E1E1E"
 
 PERSON = {
     "name": "Danny Boyette",
-    "title": "Owner/Founder",     # Michael, 2026-10-28 (from his older signature); Entra has none
+    "title": "Co-Owner/Operator",  # Michael, 2026-10-29; hardcoded until Ntiva fixes Entra
     "phone": "(813) 923-0008",    # Michael, 2026-10-28 (his live signature)
     "tel": "+18139230008",
     "email": "dboyette@BoyettePumpWell.com",   # casing as in his live signature

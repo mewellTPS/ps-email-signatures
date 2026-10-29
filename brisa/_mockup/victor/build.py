@@ -29,7 +29,7 @@ DARK_BG = "#1E1E1E"
 
 PERSON = {
     "name": "Victor Rodriguez",
-    "title": "Co-Owner / Operator",
+    "title": "Co-Owner/Operator",   # Michael, 2026-10-29: hardcoded until Ntiva fixes Entra
     "phone": "(813) 461-5972",
     "email": "vrodriguez@brisaclimate.com",
 }

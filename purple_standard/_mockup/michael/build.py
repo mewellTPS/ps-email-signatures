@@ -2,13 +2,14 @@
 """Purple Standard default signature, Michael Ewell as the sample: current layout, C, and E.
 
 PS and ACE have shared-mailbox issues, so each person gets their own hardcoded rule (Michael,
-2026-10-28); this build is the pattern. The phone is a PLACEHOLDER (Michael asked for a generic
-number): replace it per person before anything ships.
+2026-10-28); this build is the pattern; docs/review/build-rollout.py reuses it per person.
 
 Layout: his current signature (purple_standard/default.html): name and title, contact lines,
 brand strip, TPS badge top right, endorsement along the bottom. Changes:
   - dark mode (option C, ADR 0020): badge -> transparent Neon Purple; endorsement -> Neon Purple
-    on transparency; WTR DR strip icon -> the approved #3A80C0 wordmark (dark-mode-c)
+    on transparency
+  - WTR DR strip icon: the full droplet mark, no business name (Michael, 2026-10-29); the
+    glossy mid-blue drop reads on white and dark
   - text >= 10pt (no tiny text); gray #808080 -> #666666 for contrast on white
   - 480px wide, the width of the Pledge
   - C: the Pledge (badge left) replaces the endorsement, no corner badge
@@ -39,9 +40,9 @@ DARK_BG = "#1E1E1E"
 
 PERSON = {
     "name": "Michael Ewell",
-    "title": "Business Solutions Architect",   # Michael, 2026-10-28
-    "phone": "(813) 555-0100",                 # PLACEHOLDER (555-01xx is reserved for fiction): replace per person
-    "tel": "+18135550100",
+    "title": "SEO and Data Specialist",        # Michael, 2026-10-29
+    "phone": "(801) 641-5387",                 # Michael, 2026-10-29
+    "tel": "+18016415387",
     "email": "mewell@purple-standard.com",
 }
 ADDRESS = "21516 Carson Dr, Land O' Lakes, FL 34639"   # ADR 0019 + 0021
@@ -51,7 +52,7 @@ BRANDS = [("ace", "https://www.acesepticandwaste.com/", "ACE Septic &amp; Waste"
           ("wtr-dr", "https://wtrdr.com/", "WTR DR"),
           ("brisa", "https://brisaclimate.com/", "Brisa Climate"),
           ("tyrian", "https://tyrianroofing.com/", "Tyrian Roofing")]
-WTR_ICON = REPO / "_mockup/dark-mode-c/out/brand-wtr-dr.png"   # approved 2026-10-26, wordmark #3A80C0
+WTR_ICON = Path.home() / "Developer/visual-assets/wtrdr/logos/wtrdr-mark.png"   # 830x1332 droplet, transparent
 
 WIDTH = 480
 CORNER_BADGE_PX = 75
@@ -81,7 +82,9 @@ def build_images():
     magick(PS_ASSETS / "standard/email-signature/tps-endorsement.png", "-channel", "A", "-fx", f"u.a*{t}",
            "+channel", "-fill", NEON, "-colorize", "100", "-resize", f"{WIDTH * 2}x", *DPI,
            OUT / "tps-endorsement-clear.png")
-    magick(WTR_ICON, *DPI, OUT / "brand-wtr-dr-clear.png")
+    # trim, then fit the droplet inside 80x80 like the other strip icons (C, native shapes: ADR 0010)
+    magick(WTR_ICON, "-trim", "+repage", "-resize", "80x80", "-background", "none", "-gravity", "center",
+           "-extent", "80x80", *DPI, OUT / "brand-wtr-dr-drop.png")
 
 
 def p(style, inner, visible=None):
@@ -92,7 +95,7 @@ def p(style, inner, visible=None):
 def strip():
     cells = []
     for i, (slug, url, alt) in enumerate(BRANDS):
-        f = "brand-wtr-dr-clear.png" if slug == "wtr-dr" else f"brand-{slug}.png"
+        f = "brand-wtr-dr-drop.png" if slug == "wtr-dr" else f"brand-{slug}.png"
         pad = "0" if i == len(BRANDS) - 1 else "0 12px 0 0"
         cells.append(f'<td style="padding: {pad}; vertical-align: middle; line-height: 0"><a href="{url}" target="_blank" title="{alt}">'
                      f'<img src="{HOST}standard/email-signature/{f}" border="0" alt="{alt}" width="36" height="36" style="width: 36px; height: 36px; display: block"></a></td>')
@@ -133,8 +136,7 @@ def signature(footer):
         <a href="https://www.purple-standard.com" target="_blank"><img src="{HOST}standard/email-signature/{name}" border="0" alt="The Purple Standard Pledge: Clear communication. Technology and solutions driven. Professionalism in action. Exceeding expectations." width="{WIDTH}" height="{ph}" style="width: {WIDTH}px; height: {ph}px; display: block"></a>
       </td>
     </tr>"""
-    return f"""<!-- Purple Standard - Michael Ewell. Person fields are HARDCODED (shared-mailbox issue: one rule per person). -->
-<!-- The phone is a PLACEHOLDER: replace it before shipping. Dark-mode option C (ADR 0020). -->
+    return f"""<!-- Purple Standard - {PERSON['name']}. Person fields are HARDCODED until Ntiva fixes Entra (one rule per sender). Dark-mode option C (ADR 0020). -->
 <!-- Built by purple_standard/_mockup/michael/build.py - edit the script, not this file. -->
 <table cellspacing="0" cellpadding="0" id="ps-signature" style="width: {WIDTH}px; border-collapse: collapse; line-height: initial">
   <tbody>
@@ -151,7 +153,7 @@ def signature(footer):
 
 def local(h):
     h = re.sub(r"<!--.*?-->", "", h, flags=re.S)
-    for f in ("tps-endorsement-clear.png", "brand-wtr-dr-clear.png"):
+    for f in ("tps-endorsement-clear.png", "brand-wtr-dr-drop.png"):
         h = h.replace(HOST + "standard/email-signature/" + f, "out/" + f)
     for name, png in [*PLEDGES.values(), ("tps-badge-clear.png", CORNER_BADGE)]:
         h = h.replace(HOST + "standard/email-signature/" + name + '"', f'{png}"')
@@ -185,7 +187,7 @@ main{{padding:8px 24px 40px}}h1{{font-size:20px}}h2{{font-size:18px;margin:20px 
 .grid{{display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start}}
 .mail{{padding:28px;border:1px solid #ccc;border-radius:6px;width:{WIDTH}px}}</style>
 <main><h1>Purple Standard: Michael Ewell</h1>
-<p>Real data except the phone, which is a <b>placeholder</b> (813) 555-0100. Dark mode is simulated:
+<p>Real data. Dark mode is simulated:
 Outlook recolors text but not images or borders. All text mappings were sampled from Outlook.</p>
 <div class="grid">{''.join(cols)}</div></main>
 """)

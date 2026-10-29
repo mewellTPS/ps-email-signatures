@@ -74,6 +74,6 @@ Build: `python3 purple_standard/_mockup/michael/build.py`.
 
 | Version | Paste file | Images it needs (all in `standard/email-signature/`) |
 |---|---|---|
-| Current (endorsement) | `purple_standard/_mockup/michael/signature-current.html` | `tps-endorsement-clear.png`, `brand-wtr-dr-clear.png` ← `purple_standard/_mockup/michael/out/`; `tps-badge-clear.png` (shared) |
-| C · pledge, badge left | `signature-c.html` | `brand-wtr-dr-clear.png`; `tps-pledge-clear.png` (shared) |
-| E · pledge text + corner badge | `signature-e.html` | `brand-wtr-dr-clear.png`; `tps-pledge-clear-text.png` + `tps-badge-clear.png` (shared) |
+| Current (endorsement) | `purple_standard/_mockup/michael/signature-current.html` | `tps-endorsement-clear.png`, `brand-wtr-dr-drop.png` ← `purple_standard/_mockup/michael/out/`; `tps-badge-clear.png` (shared) |
+| C · pledge, badge left | `signature-c.html` | `brand-wtr-dr-drop.png`; `tps-pledge-clear.png` (shared) |
+| E · pledge text + corner badge | `signature-e.html` | `brand-wtr-dr-drop.png`; `tps-pledge-clear-text.png` + `tps-badge-clear.png` (shared) |

@@ -23,13 +23,13 @@ DARK_BG = "#1E1E1E"
 PICKS = [
     ("Purple Standard", "Michael Ewell", "purple_standard/_mockup/michael", "e", ""),
     ("Brisa Climate", "Victor Rodriguez", "brisa/_mockup/victor", "e", ""),
-    ("WTR DR", "Sean Myatt", "wtr-dr/_mockup/sean", "e", ""),
+    ("WTR DR", "Sean Myatt", "wtr-dr/_mockup/sean", "c", ""),   # C, badge in the Pledge (Michael, 2026-10-29)
     ("Tyrian Roofing", "John Rodrigues", "tyrian/_mockup/john", "e", ""),
     ("Boyette Pump &amp; Well", "Danny Boyette", "boyette/_mockup/danny", "c", ""),
     ("Purple Current", "Kenny Morrow", "purple-current/_mockup/kenny", "e", ""),
     ("ACE Septic &amp; Waste", "Sample person", "ace/_mockup/e", "e-v2", ""),   # placeholder person until the ACE list arrives
 ]
-TITLE_SWAP = {"Michael Ewell": ("Business Solutions Architect", "SEO and Data Specialist")}
+TITLE_SWAP = {}   # Michael's build now carries "SEO and Data Specialist" (2026-10-29)
 
 
 def load(build_dir):

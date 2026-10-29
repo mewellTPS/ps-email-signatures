@@ -29,7 +29,7 @@ DARK_BG = "#1E1E1E"
 
 PERSON = {
     "name": "Sean Myatt",
-    "title": "Owner/Founder",     # confirmed by Michael 2026-10-28; Entra has none
+    "title": "Co-Owner/Operator",  # Michael, 2026-10-29; hardcoded until Ntiva fixes Entra
     "phone": "(813) 429-8737",
     "tel": "+18134298737",
     "email": "smyatt@wtrdr.com",
