@@ -40,6 +40,13 @@ PEOPLE = {
 }
 OFFICE_LINE = {"kelly"}   # label O: (office) instead of P:
 
+# Above the signature: a blank line so it isn't pushed against the email, plus an optional closer in
+# Outlook's body font (Michael, 2026-10-30). Nan keeps her own "Thanks, Nan" in Outlook: fonts aren't
+# sent with mail, so her Lucida Handwriting only shows where it is installed (Nan, 2026-10-30).
+SIGNOFF = {"brady": "Thanks,", "nan": None}
+INK = "#111111"   # Outlook dark -> about #F2F2F2
+BODY_FONT = "font-family: Aptos, Calibri, Arial, Helvetica, sans-serif; font-size: 11pt; line-height: 1.15"
+
 # (rule name, sender, source, note). Source: ("op", build dir, variant) | ("ps", person) | ("ace", person)
 RULES = [
     ("BPW - Danny Boyette", "dboyette@BoyettePumpWell.com", ("op", "boyette/_mockup/danny", "c"), ""),
@@ -54,7 +61,7 @@ RULES = [
     ("PS - Brady Bodden", "bbodden@purple-standard.com", ("ps", "brady"), ""),
     ("PS - Michael Ewell", "mewell@purple-standard.com", ("ps", "michael"), ""),
     ("PS - Josh Irvine", "jirvine@purple-standard.com", ("ps", "josh"), ""),
-    ("PS - Nan Mallory (shared mailbox)", "nmallory@purple-standard.com", ("ps", "nan"), "Shared mailbox: Nan removes her Outlook signature so it isn't doubled."),
+    ("PS - Nan Mallory (shared mailbox)", "nmallory@purple-standard.com", ("ps", "nan"), "Shared mailbox: Nan keeps an Outlook signature with only her closing (\"Thanks, Nan\"); CodeTwo adds the block below it."),
     ("PS - Ryan Clarke (shared mailbox)", "rclarke@purple-standard.com", ("ps", "ryan"), "Shared mailbox: Ryan removes his Outlook signature so it isn't doubled."),
     ("PS - Faith Collier", "fcollier@purple-standard.com", ("ps", "faith"), "May be a shared mailbox (Michael is confirming); the signature is the same either way."),
     ("PS - Kelly Lanzone (shared mailbox)", "klanzone@purple-standard.com", ("ps", "kelly"), "Shared mailbox: Kelly removes her Outlook signature so it isn't doubled."),
@@ -65,7 +72,22 @@ def tel(phone):
     return "+1" + re.sub(r"\D", "", phone)
 
 
+def signoff(source, html):
+    if source[0] == "op" or source[1] not in SIGNOFF:
+        return html
+    out = f'<p style="margin: 0; {BODY_FONT}; color: {INK}" data-codetwo-visible="Spacer">&nbsp;</p>\n'
+    closer = SIGNOFF[source[1]]
+    if closer:
+        out += f'<p style="margin: 0 0 12px 0; {BODY_FONT}; color: {INK}" data-codetwo-visible="Sign-off">{closer}</p>\n'
+    return out + html
+
+
 def render(source, sender):
+    html, mod, d = _render(source, sender)
+    return signoff(source, html), mod, d
+
+
+def _render(source, sender):
     """Return (paste html with hosted URLs, module for local()/outlook_dark(), build dir)."""
     kind = source[0]
     if kind == "op":
@@ -113,7 +135,7 @@ def main():
 <p class="meta">Sender: <b>{sender}</b> · paste file <code>docs/rollout/paste/{i:02d}-{slug}.html</code></p>
 {f'<p class="note">{note}</p>' if note else ''}<div class="pair">
 <div><h3>Light mode</h3><div class="mail" style="background:#fff">{lo}</div></div>
-<div><h3>Outlook dark mode (simulated)</h3><div class="mail" style="background:{DARK_BG}">{mod.outlook_dark(lo)}</div></div>
+<div><h3>Outlook dark mode (simulated)</h3><div class="mail" style="background:{DARK_BG}">{re.sub(rf"(?<![-\w])color: ?{INK}", "color: #F2F2F2", mod.outlook_dark(lo), flags=re.I)}</div></div>
 </div></section>""")
     print("step 2/2: page", flush=True)
     out = HERE / "signatures-rollout-review.html"

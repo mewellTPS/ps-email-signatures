@@ -21,6 +21,13 @@ hardcoded until Ntiva fixes Entra job titles; then people move back to the brand
 - Each rule's template was copied back out of the CodeTwo source editor and diffed against `paste-clean/`: identical for all 15. Every image URL in each file returned 200.
 - CodeTwo Test Rules, sender chosen with **Select** (the From box is read-only and silently defaults to the signed-in user): each of the 15 addresses applied its own rule and no other.
 
+## Changes since launch
+
+- **2026-10-30:** three rules re-pasted, each verified by copying the saved source back out and diffing it against `paste-clean/` (identical), then by Test Rules (each sender applied its own rule).
+  - **PS - Brady Bodden:** a blank line, then "Thanks," in Outlook's body font, above the block.
+  - **ACE - Nan Mallory** and **PS - Nan Mallory (shared mailbox):** a blank line above the block, with her name kept. Nan keeps her own Outlook signature with only her closing ("Thanks, Nan"). Fonts aren't sent with mail, so her Lucida Handwriting only shows where it is installed; a CodeTwo closing would not look like hers on Mac or iPhone.
+  - Michael's hand-added "Thanks," edits on Brady's and Nan's PS rules were replaced. The live sources from before this change are in `codetwo-before/ps-brady-2026-10-30.html` and `codetwo-before/ps-nan-shared-2026-10-30.html`. Nan's ACE rule matched `paste-clean/` before, so its old version is in git history.
+
 ## Rule map
 
 | Rule | Sender | Was |
