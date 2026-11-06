@@ -28,6 +28,11 @@ hardcoded until Ntiva fixes Entra job titles; then people move back to the brand
   - **ACE - Nan Mallory** and **PS - Nan Mallory (shared mailbox):** a blank line above the block, with her name kept. Nan keeps her own Outlook signature with only her closing ("Thanks, Nan"). Fonts aren't sent with mail, so her Lucida Handwriting only shows where it is installed; a CodeTwo closing would not look like hers on Mac or iPhone.
   - Michael's hand-added "Thanks," edits on Brady's and Nan's PS rules were replaced. The live sources from before this change are in `codetwo-before/ps-brady-2026-10-30.html` and `codetwo-before/ps-nan-shared-2026-10-30.html`. Nan's ACE rule matched `paste-clean/` before, so its old version is in git history.
 
+- **2026-11-03:** **ACE - Ryan Clarke** and **PS - Ryan Clarke (shared mailbox)** re-pasted. Each has a blank line above the block, and the phone line is removed at Ryan's request (the email line takes its 8px top margin). `build-rollout.py` gains `NO_PHONE`. Before the paste, both live sources matched `paste-clean/` at HEAD, so the old versions are in git history. Each saved rule was reopened, and its source was copied back out and diffed against `paste-clean/`: identical. Senders were not changed, so Test Rules was not re-run.
+
+- **2026-11-05:** **ACE - Patty Clarke** created (rule 17, sender pclarke@acesepticandwaste.com). Default ACE template with no job title or phone line (`build-rollout.py` gains `NO_TITLE`), plus a blank line and "Thanks," above the block. The saved source was copied back out and matched the paste file (whitespace aside); it is `paste-clean/17-ace-patty-clarke.html`. Test Rules with sender pclarke@acesepticandwaste.com: her rule applied, the other 15 were skipped. Entra also lists a second Patty Clarke mailbox, pclarkeold@septicandwaste.com, which this rule does not cover.
+
+
 ## Rule map
 
 | Rule | Sender | Was |
@@ -40,6 +45,7 @@ hardcoded until Ntiva fixes Entra job titles; then people move back to the brand
 | ACE - Ryan Clarke | rclarke@acesepticandwaste.com | ACE Septic Ryan (was unpublished, no design) |
 | ACE - Nan Mallory | nmallory@acesepticandwaste.com | new (split from Nan Shared Mailbox) |
 | ACE - Kelly Lanzone | klanzone@acesepticandwaste.com | new (split from Kelly Shared Mailbox) |
+| ACE - Patty Clarke | pclarke@acesepticandwaste.com | new (2026-11-05) |
 | PS - Brady Bodden | bbodden@purple-standard.com | Purple Standard (jirvine, mewell removed) |
 | PS - Michael Ewell | mewell@purple-standard.com | new |
 | PS - Josh Irvine | jirvine@purple-standard.com | new |

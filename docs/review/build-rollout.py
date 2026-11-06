@@ -37,13 +37,18 @@ PEOPLE = {
     "ryan": ("Ryan Clarke", "Co-Founder", "(813) 363-3794"),
     "kelly": ("Kelly Lanzone", "Accounting &amp; Billing Manager", "(813) 971-8770"),
     "faith": ("Faith Collier", "Finance and Payroll Administrator", "(270) 780-4205"),
+    "patty": ("Patty Clarke", "", ""),   # no title or phone (Michael, 2026-11-05)
 }
 OFFICE_LINE = {"kelly"}   # label O: (office) instead of P:
 
 # Above the signature: a blank line so it isn't pushed against the email, plus an optional closer in
 # Outlook's body font (Michael, 2026-10-30). Nan keeps her own "Thanks, Nan" in Outlook: fonts aren't
 # sent with mail, so her Lucida Handwriting only shows where it is installed (Nan, 2026-10-30).
-SIGNOFF = {"brady": "Thanks,", "nan": None}
+SIGNOFF = {"brady": "Thanks,", "nan": None, "ryan": None, "patty": "Thanks,"}
+# No phone line: Ryan asked for his cell to be removed (Michael, 2026-11-03). Email takes its top margin.
+NO_PHONE = {"ryan", "patty"}
+# No job title line (Michael, 2026-11-05). The email line keeps its 8px top margin below the name.
+NO_TITLE = {"patty"}
 INK = "#111111"   # Outlook dark -> about #F2F2F2
 BODY_FONT = "font-family: Aptos, Calibri, Arial, Helvetica, sans-serif; font-size: 11pt; line-height: 1.15"
 
@@ -65,6 +70,7 @@ RULES = [
     ("PS - Ryan Clarke (shared mailbox)", "rclarke@purple-standard.com", ("ps", "ryan"), "Shared mailbox: Ryan removes his Outlook signature so it isn't doubled."),
     ("PS - Faith Collier", "fcollier@purple-standard.com", ("ps", "faith"), "May be a shared mailbox (Michael is confirming); the signature is the same either way."),
     ("PS - Kelly Lanzone (shared mailbox)", "klanzone@purple-standard.com", ("ps", "kelly"), "Shared mailbox: Kelly removes her Outlook signature so it isn't doubled."),
+    ("ACE - Patty Clarke", "pclarke@acesepticandwaste.com", ("ace", "patty"), ""),
 ]
 
 
@@ -82,9 +88,28 @@ def signoff(source, html):
     return out + html
 
 
+def drop_phone(source, html):
+    if source[0] == "op" or source[1] not in NO_PHONE:
+        return html
+    html, n = re.subn(r'\n?[ \t]*<p style="margin: 0; ([^"]*?)margin: 8px 0 0 0; [^"]*" data-codetwo-visible="Phone">.*?</p>', "", html, count=1)
+    assert n == 1, "phone line not found"
+    html, n = re.subn(r'<p style="margin: 0; (font-family: [^;]+;) (font-size[^"]*" data-codetwo-visible="Email")',
+                      r'<p style="margin: 0; \1 margin: 8px 0 0 0; \2', html, count=1)
+    assert n == 1, "email line not found"
+    return html
+
+
+def drop_title(source, html):
+    if source[0] == "op" or source[1] not in NO_TITLE:
+        return html
+    html, n = re.subn(r'\n?[ \t]*<p style="[^"]*" data-codetwo-visible="Job title">.*?</p>', "", html, count=1)
+    assert n == 1, "job title line not found"
+    return html
+
+
 def render(source, sender):
     html, mod, d = _render(source, sender)
-    return signoff(source, html), mod, d
+    return signoff(source, drop_title(source, drop_phone(source, html))), mod, d
 
 
 def _render(source, sender):
