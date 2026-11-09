@@ -31,7 +31,7 @@ hardcoded until Ntiva fixes Entra job titles; then people move back to the brand
 - **2026-11-03:** **ACE - Ryan Clarke** and **PS - Ryan Clarke (shared mailbox)** re-pasted. Each has a blank line above the block, and the phone line is removed at Ryan's request (the email line takes its 8px top margin). `build-rollout.py` gains `NO_PHONE`. Before the paste, both live sources matched `paste-clean/` at HEAD, so the old versions are in git history. Each saved rule was reopened, and its source was copied back out and diffed against `paste-clean/`: identical. Senders were not changed, so Test Rules was not re-run.
 
 - **2026-11-05:** **ACE - Patty Clarke** created (rule 17, sender pclarke@acesepticandwaste.com). Default ACE template with no job title or phone line (`build-rollout.py` gains `NO_TITLE`), plus a blank line and "Thanks," above the block. The saved source was copied back out and matched the paste file (whitespace aside); it is `paste-clean/17-ace-patty-clarke.html`. Test Rules with sender pclarke@acesepticandwaste.com: her rule applied, the other 15 were skipped. Entra also lists a second Patty Clarke mailbox, pclarkeold@septicandwaste.com, which this rule does not cover.
-
+- **2026-11-09:** Two labeled addresses replace the single Carson Dr line on the 12 non-ACE rules: **Operations:** 21516 Carson Dr, Land O' Lakes, FL 34639 and **Mailing:** 8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638 (labels bold, in each brand's label color). The five operator rules break each address after the street; PS rules keep one line each. Boyette also labels its Reddick location **Field:**. ACE rules are unchanged (8005). Three new rules, cloned from Patty (ACE) and Faith (PS), with title Administrative Support, email only, blank line and "Thanks,": **ACE - Laya Nawabit**, **PS - Laya Nawabit**, **PS - Alyssa Baker** (senders by email address). Before each paste the live source was copied out to `codetwo-before/*-2026-11-09.html` and diffed against `paste-clean/` at HEAD: 10 matched; **PS - Michael Ewell** and **PS - Josh Irvine** carried hand-added blank lines above the block, which were kept (`LIVE_PREFIX` in `build-rollout.py`). After publishing, every one of the 15 rules was reopened and its saved source copied back out: identical to `paste-clean/`. Test Rules with each new sender applied only its own rule.
 
 ## Rule map
 
@@ -53,3 +53,6 @@ hardcoded until Ntiva fixes Entra job titles; then people move back to the brand
 | PS - Ryan Clarke (shared mailbox) | rclarke@purple-standard.com | Purple Standard - Ryan Shared Mailbox (was unpublished, no design) |
 | PS - Faith Collier | fcollier@purple-standard.com | Purple Standard - Faith |
 | PS - Kelly Lanzone (shared mailbox) | klanzone@purple-standard.com | Purple Standard - Kelly Shared Mailbox |
+| ACE - Laya Nawabit | lnawabit@acesepticandwaste.com | new (2026-11-09) |
+| PS - Laya Nawabit | lnawabit@purple-standard.com | new (2026-11-09) |
+| PS - Alyssa Baker | abaker@purple-standard.com | new (2026-11-09) |

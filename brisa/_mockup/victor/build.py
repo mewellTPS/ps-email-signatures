@@ -33,7 +33,8 @@ PERSON = {
     "phone": "(813) 461-5972",
     "email": "vrodriguez@brisaclimate.com",
 }
-ADDRESS = "21516 Carson Dr, Land O' Lakes, FL 34639"   # ADR 0019 + 0021 spelling
+ADDRESSES = [("Operations", "21516 Carson Dr, Land O' Lakes, FL 34639"),   # Michael, 2026-11-09 (amends ADR 0019)
+             ("Mailing", "8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638")]
 
 LOGO_W, LOGO_H = 105, 140         # display size; file is 2x
 GAP = 18                          # logo-to-bar = bar-to-text
@@ -93,7 +94,7 @@ def signature(footer, corner=False):
         p("margin: 2px 0 0 0; font-size: 10pt; color: #6E6E6E", PERSON["title"], "Job title"),
         p(f"margin: 8px 0 0 0; {line}", f'<b style="color: {PURPLE}">P:</b> <a href="tel:+18134615972" style="color: #2A2A2A; text-decoration: none">{PERSON["phone"]}</a>', "Phone"),
         p(line, f'<b style="color: {PURPLE}">E:</b> <a href="mailto:{PERSON["email"]}" style="color: #2A2A2A; text-decoration: none">{PERSON["email"]}</a>', "Email"),
-        p(line, ADDRESS, "Company address"),
+        *(p(line, f'<b style="color: {PURPLE}">{k}:</b> {a.replace(", ", "<br>", 1)}', "Company address") for k, a in ADDRESSES),
         p(line, f'<a href="https://brisaclimate.com/" target="_blank" style="color: {PURPLE}; text-decoration: none"><b>www.brisaclimate.com</b></a>', "Website"),
         p("margin: 8px 0 0 0; font-size: 0; line-height: 0",
           badge("facebook", "https://www.facebook.com/profile.php?id=61589534684038")

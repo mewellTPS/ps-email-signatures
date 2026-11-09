@@ -38,6 +38,8 @@ PERSON = {
     "email": "kmorrow@purple-current.com",
 }
 ADDRESS = ("21516 Carson Dr", "Land O' Lakes, FL 34639")   # ADR 0019 + 0021
+ADDRESSES = [("Operations", "21516 Carson Dr, Land O' Lakes, FL 34639"),   # Michael, 2026-11-09 (amends ADR 0019)
+             ("Mailing", "8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638")]
 SOCIAL = [("google", "https://share.google/SFB2Gbv8p9uJoWxwg"),
           ("facebook", "https://www.facebook.com/people/Purple-Current/61573255989927/"),
           ("instagram", "https://www.instagram.com/purplecurrent"),
@@ -148,7 +150,7 @@ def compact(footer, corner=False):
         p("margin: 2px 0 0 0; font-size: 10pt; color: #6E6E6E", PERSON["title"], "Job title"),
         p(f"margin: 8px 0 0 0; {line}", f'<b style="color: {PURPLE}">P:</b> <a href="tel:{PERSON["tel"]}" style="color: #333333; text-decoration: none">{PERSON["phone"]}</a>', "Phone"),
         p(line, f'<b style="color: {PURPLE}">E:</b> <a href="mailto:{PERSON["email"]}" style="color: #333333; text-decoration: none">{PERSON["email"]}</a>', "Email"),
-        p(line, ", ".join(ADDRESS), "Company address"),
+        *(p(line, f'<b style="color: {PURPLE}">{k}:</b> {a.replace(", ", "<br>", 1)}', "Company address") for k, a in ADDRESSES),
         p(line, f'<a href="https://purple-current.com/" target="_blank" style="color: {PURPLE}; text-decoration: none"><b>www.purple-current.com</b></a>', "Website"),
         p("margin: 8px 0 0 0; font-size: 0; line-height: 0", badges(24, 6), "Social links"),
     ])

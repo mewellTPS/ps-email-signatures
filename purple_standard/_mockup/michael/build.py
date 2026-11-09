@@ -45,7 +45,8 @@ PERSON = {
     "tel": "+18016415387",
     "email": "mewell@purple-standard.com",
 }
-ADDRESS = "21516 Carson Dr, Land O' Lakes, FL 34639"   # ADR 0019 + 0021
+ADDRESSES = [("Operations", "21516 Carson Dr, Land O' Lakes, FL 34639"),   # Michael, 2026-11-09 (amends ADR 0019)
+             ("Mailing", "8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638")]
 BRANDS = [("ace", "https://www.acesepticandwaste.com/", "ACE Septic &amp; Waste"),
           ("purple-current", "https://purple-current.com/", "Purple Current"),
           ("boyette", "https://www.boyettepumpwell.com/", "Boyette Pump &amp; Well"),
@@ -111,7 +112,7 @@ def signature(footer):
         p(f"margin: 2px 0 0 0; font-size: 10pt; color: {STANDARD}", f"<b>{PERSON['title']}</b>", "Job title"),
         p(f"margin: 8px 0 0 0; {line}", f'<b style="color: {STANDARD}">P:</b> <a href="tel:{PERSON["tel"]}" style="color: {GRAY}; text-decoration: none">{PERSON["phone"]}</a>', "Phone"),
         p(line, f'<b style="color: {STANDARD}">E:</b> <a href="mailto:{PERSON["email"]}" style="color: {NEON}; text-decoration: none">{PERSON["email"]}</a>', "Email"),
-        p(line, ADDRESS, "Company address"),
+        *(p(line, f'<b style="color: {STANDARD}">{k}:</b> {a}', "Company address") for k, a in ADDRESSES),
         p(line, f'<a href="https://www.purple-standard.com" target="_blank" style="color: {NEON}; text-decoration: none"><b>www.purple-standard.com</b></a>', "Website"),
         strip(),
     ])

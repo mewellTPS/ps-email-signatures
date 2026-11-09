@@ -38,17 +38,25 @@ PEOPLE = {
     "kelly": ("Kelly Lanzone", "Accounting &amp; Billing Manager", "(813) 971-8770"),
     "faith": ("Faith Collier", "Finance and Payroll Administrator", "(270) 780-4205"),
     "patty": ("Patty Clarke", "", ""),   # no title or phone (Michael, 2026-11-05)
+    # Email only until the phone situation is sorted; no personal cells (Michael, 2026-11-09)
+    "laya": ("Laya Nawabit", "Administrative Support", ""),
+    "alyssa": ("Alyssa Baker", "Administrative Support", ""),
 }
 OFFICE_LINE = {"kelly"}   # label O: (office) instead of P:
 
 # Above the signature: a blank line so it isn't pushed against the email, plus an optional closer in
 # Outlook's body font (Michael, 2026-10-30). Nan keeps her own "Thanks, Nan" in Outlook: fonts aren't
 # sent with mail, so her Lucida Handwriting only shows where it is installed (Nan, 2026-10-30).
-SIGNOFF = {"brady": "Thanks,", "nan": None, "ryan": None, "patty": "Thanks,"}
+SIGNOFF = {"brady": "Thanks,", "nan": None, "ryan": None, "patty": "Thanks,", "laya": "Thanks,", "alyssa": "Thanks,"}
 # No phone line: Ryan asked for his cell to be removed (Michael, 2026-11-03). Email takes its top margin.
-NO_PHONE = {"ryan", "patty"}
+NO_PHONE = {"ryan", "patty", "laya", "alyssa"}
 # No job title line (Michael, 2026-11-05). The email line keeps its 8px top margin below the name.
 NO_TITLE = {"patty"}
+# Blank lines added by hand in CodeTwo above the block, kept verbatim (found live 2026-11-09).
+LIVE_PREFIX = {
+    "michael": '<p style="margin: 0.1pt; font-family: Arial; font-size: 10pt;"><br></p>' * 2,
+    "josh": '<p style="font-family: Arial; font-size: 10pt; margin: 0.1pt;"><br></p>',
+}
 INK = "#111111"   # Outlook dark -> about #F2F2F2
 BODY_FONT = "font-family: Aptos, Calibri, Arial, Helvetica, sans-serif; font-size: 11pt; line-height: 1.15"
 
@@ -71,6 +79,9 @@ RULES = [
     ("PS - Faith Collier", "fcollier@purple-standard.com", ("ps", "faith"), "May be a shared mailbox (Michael is confirming); the signature is the same either way."),
     ("PS - Kelly Lanzone (shared mailbox)", "klanzone@purple-standard.com", ("ps", "kelly"), "Shared mailbox: Kelly removes her Outlook signature so it isn't doubled."),
     ("ACE - Patty Clarke", "pclarke@acesepticandwaste.com", ("ace", "patty"), ""),
+    ("ACE - Laya Nawabit", "lnawabit@acesepticandwaste.com", ("ace", "laya"), ""),
+    ("PS - Laya Nawabit", "lnawabit@purple-standard.com", ("ps", "laya"), ""),
+    ("PS - Alyssa Baker", "abaker@purple-standard.com", ("ps", "alyssa"), ""),
 ]
 
 
@@ -109,7 +120,10 @@ def drop_title(source, html):
 
 def render(source, sender):
     html, mod, d = _render(source, sender)
-    return signoff(source, drop_title(source, drop_phone(source, html))), mod, d
+    html = signoff(source, drop_title(source, drop_phone(source, html)))
+    if source[0] != "op" and source[1] in LIVE_PREFIX:
+        html = LIVE_PREFIX[source[1]] + "\n" + html
+    return html, mod, d
 
 
 def _render(source, sender):

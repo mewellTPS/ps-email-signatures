@@ -37,7 +37,8 @@ PERSON = {
     "tel": "+18134715201",
     "email": "jrodrigues@tyrianroofing.com",
 }
-ADDRESS = "21516 Carson Dr, Land O' Lakes, FL 34639"   # ADR 0019 + 0021 spelling
+ADDRESSES = [("Operations", "21516 Carson Dr, Land O' Lakes, FL 34639"),   # Michael, 2026-11-09 (amends ADR 0019)
+             ("Mailing", "8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638")]
 SOCIAL = [("google", "https://share.google/wNanv1cHcJi2GktCp"),          # Michael, 2026-10-28
           ("instagram", "https://www.instagram.com/tyrianroofing")]      # Michael kept it; FB + YouTube dropped
 
@@ -125,7 +126,7 @@ def signature(footer, corner=False):
         p("margin: 2px 0 0 0; font-size: 10pt; color: #6E6E6E", PERSON["title"], "Job title"),
         p(f"margin: 8px 0 0 0; {line}", f'<b style="color: {PURPLE}">P:</b> <a href="tel:{PERSON["tel"]}" style="color: #2A2A2A; text-decoration: none">{PERSON["phone"]}</a>', "Phone"),
         p(line, f'<b style="color: {PURPLE}">E:</b> <a href="mailto:{PERSON["email"]}" style="color: #2A2A2A; text-decoration: none">{PERSON["email"]}</a>', "Email"),
-        p(line, ADDRESS, "Company address"),
+        *(p(line, f'<b style="color: {PURPLE}">{k}:</b> {a.replace(", ", "<br>", 1)}', "Company address") for k, a in ADDRESSES),
         p(line, f'<a href="https://tyrianroofing.com/" target="_blank" style="color: {PURPLE}; text-decoration: none"><b>www.tyrianroofing.com</b></a>', "Website"),
         p("margin: 8px 0 0 0; font-size: 0; line-height: 0",
           "".join(badge(b, u, i == len(SOCIAL) - 1) for i, (b, u) in enumerate(SOCIAL)), "Social links"),

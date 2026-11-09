@@ -34,7 +34,8 @@ PERSON = {
     "tel": "+18134298737",
     "email": "smyatt@wtrdr.com",
 }
-ADDRESS = "21516 Carson Dr, Land O' Lakes, FL 34639"   # ADR 0019 + 0021 spelling
+ADDRESSES = [("Operations", "21516 Carson Dr, Land O' Lakes, FL 34639"),   # Michael, 2026-11-09 (amends ADR 0019)
+             ("Mailing", "8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638")]
 
 LOGO = REPO / "_mockup/dark-mode-c/out/wtrdr-logo.png"   # 200x200, wordmark #3A80C0
 LOGO_W = LOGO_H = 100             # display size; file is 2x
@@ -79,7 +80,7 @@ def signature(footer, corner=False):
         p("margin: 2px 0 0 0; font-size: 10pt; color: #666666", PERSON["title"], "Job title"),
         p(f"margin: 8px 0 0 0; {line}", f'<b style="color: {BLUE}">P:</b> <a href="tel:{PERSON["tel"]}" style="color: #2A2A2A; text-decoration: none">{PERSON["phone"]}</a>', "Phone"),
         p(line, f'<b style="color: {BLUE}">E:</b> <a href="mailto:{PERSON["email"]}" style="color: #2A2A2A; text-decoration: none">{PERSON["email"]}</a>', "Email"),
-        p(line, ADDRESS, "Company address"),
+        *(p(line, f'<b style="color: {BLUE}">{k}:</b> {a.replace(", ", "<br>", 1)}', "Company address") for k, a in ADDRESSES),
         p(line, f'<a href="https://wtrdr.com/" target="_blank" style="color: {BLUE}; text-decoration: none"><b>www.wtrdr.com</b></a>', "Website"),
         p("margin: 8px 0 0 0; font-size: 0; line-height: 0",
           badge("google", "https://g.page/r/CXbaZrIdtlq-EBM/review")

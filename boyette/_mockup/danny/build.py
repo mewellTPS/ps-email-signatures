@@ -42,8 +42,9 @@ PERSON = {
     "tel": "+18139230008",
     "email": "dboyette@BoyettePumpWell.com",   # casing as in his live signature
 }
-ADDRESSES = ["21516 Carson Dr, Land O' Lakes, FL 34639",   # ADR 0019 + 0021
-             "15215 N Hwy 329, Reddick, FL 32686"]         # Reddick location kept (Michael, 2026-10-28)
+ADDRESSES = [("Operations", "21516 Carson Dr, Land O' Lakes, FL 34639"),   # Michael, 2026-11-09 (amends ADR 0019)
+             ("Mailing", "8011 Land O' Lakes Blvd, Land O' Lakes, FL 34638"),
+             ("Field", "15215 N Hwy 329, Reddick, FL 32686")]               # Reddick location, labeled Field (Michael, 2026-11-09)
 SOCIAL = [("google", "https://share.google/F9yOsah8sVpCjubV7"),
           ("facebook", "https://www.facebook.com/BoyettePumpandWell/"),
           ("instagram", "https://www.instagram.com/boyettepumpwellserviceinc"),
@@ -96,7 +97,8 @@ def contact_lines():
     name = [p("font-size: 13pt; line-height: 1.15", f"<b>{PERSON['name']}</b>", "Name"),
             p("margin: 2px 0 0 0; font-size: 10pt", PERSON["title"], "Job title"),
             p(f"margin: 10px 0 0 0; {line}", f'<b>P:</b> <a href="tel:{PERSON["tel"]}" style="color: #000000; text-decoration: none">{PERSON["phone"]}</a>', "Phone")]
-    rest = [p(line, a, "Company address") for a in ADDRESSES] + [
+    rest = [p(line, f'<b style="color: {RED}">{k}:</b> ' + a.replace(", ", "<br>", 1), "Company address")
+            for k, a in ADDRESSES] + [
         p(f"margin: 8px 0 0 0; {line}", f'<b>E:</b> <a href="mailto:{PERSON["email"]}" style="color: #000000; text-decoration: none">{PERSON["email"]}</a>', "Email"),
         p(line, f'<a href="https://www.boyettepumpwell.com/" target="_blank" style="color: {RED}; text-decoration: none">www.boyettepumpwell.com</a>', "Website"),
         p("margin: 10px 0 0 0; font-size: 0; line-height: 0", "".join(
