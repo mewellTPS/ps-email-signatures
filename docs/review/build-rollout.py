@@ -39,7 +39,7 @@ PEOPLE = {
     "faith": ("Faith Collier", "Finance and Payroll Administrator", "(270) 780-4205"),
     "patty": ("Patty Clarke", "", ""),   # no title or phone (Michael, 2026-11-05)
     # Email only until the phone situation is sorted; no personal cells (Michael, 2026-11-09)
-    "laya": ("Laya Nawabit", "Administrative Support", ""),
+    "laya": ("Laya Nawabit", "Business Operations &amp; Development Coordinator", "(813) 508-8694"),   # Michael, 2026-11-10
     "alyssa": ("Alyssa Baker", "Administrative Support", ""),
 }
 OFFICE_LINE = {"kelly"}   # label O: (office) instead of P:
@@ -47,9 +47,9 @@ OFFICE_LINE = {"kelly"}   # label O: (office) instead of P:
 # Above the signature: a blank line so it isn't pushed against the email, plus an optional closer in
 # Outlook's body font (Michael, 2026-10-30). Nan keeps her own "Thanks, Nan" in Outlook: fonts aren't
 # sent with mail, so her Lucida Handwriting only shows where it is installed (Nan, 2026-10-30).
-SIGNOFF = {"brady": "Thanks,", "nan": None, "ryan": None, "patty": "Thanks,", "laya": "Thanks,", "alyssa": "Thanks,"}
+SIGNOFF = {"brady": "Thanks,", "nan": None, "ryan": None, "patty": "Thanks,", "laya": "Service Simplified,", "alyssa": "Thanks,"}
 # No phone line: Ryan asked for his cell to be removed (Michael, 2026-11-03). Email takes its top margin.
-NO_PHONE = {"ryan", "patty", "laya", "alyssa"}
+NO_PHONE = {"ryan", "patty", "alyssa"}
 # No job title line (Michael, 2026-11-05). The email line keeps its 8px top margin below the name.
 NO_TITLE = {"patty"}
 # Blank lines added by hand in CodeTwo above the block, kept verbatim (found live 2026-11-09).
