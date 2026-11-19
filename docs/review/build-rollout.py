@@ -78,7 +78,8 @@ RULES = [
     ("PS - Ryan Clarke (shared mailbox)", "rclarke@purple-standard.com", ("ps", "ryan"), "Shared mailbox: Ryan removes his Outlook signature so it isn't doubled."),
     ("PS - Faith Collier", "fcollier@purple-standard.com", ("ps", "faith"), "May be a shared mailbox (Michael is confirming); the signature is the same either way."),
     ("PS - Kelly Lanzone (shared mailbox)", "klanzone@purple-standard.com", ("ps", "kelly"), "Shared mailbox: Kelly removes her Outlook signature so it isn't doubled."),
-    ("ACE - Patty Clarke", "pclarke@acesepticandwaste.com", ("ace", "patty"), ""),
+    # Moved from ACE (pclarke@acesepticandwaste.com) to Purple Standard (Michael, 2026-11-19)
+    ("PS - Patty Clarke", "pclarke@purple-standard.com", ("ps", "patty"), ""),
     ("ACE - Laya Nawabit", "lnawabit@acesepticandwaste.com", ("ace", "laya"), ""),
     ("PS - Laya Nawabit", "lnawabit@purple-standard.com", ("ps", "laya"), ""),
     ("PS - Alyssa Baker", "abaker@purple-standard.com", ("ps", "alyssa"), ""),
